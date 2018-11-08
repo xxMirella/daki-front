@@ -1,22 +1,71 @@
 
   
 #login {
+    background-image: url('../assets/bg/bg-home.jpg');
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     background-color: #4B54CE;
-    min-height: 100vh;
+    
 }
 
 .flex {
     padding: 10px 0px;
+    min-height: 100vh;
 }
 
-.eita {
-    width: 100%;
+.login-board {
+    max-width: 500px;
+    min-width: 310px;
     background-color: #fff;
     border-radius: 15px;
     padding: 15px;
+    height: 100%;
+    -webkit-box-shadow: 0px 0px 22px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 22px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 22px 5px rgba(0,0,0,0.2);
 }
 
-.form-group label {
+.login-board .icon-voltar {
+    max-width: 20px;
+    height: auto;
+}
+
+.login-board form {
+    margin: 10px;
+    
+}
+
+.login-board .form-group label {
     text-transform: uppercase;
     font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+
+.login-board .form-group input {
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 4px 0px ;
+    font-size: 10px;
+}
+
+.login-board form .btn {
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    max-width: 220px;
+    display: block;
+    padding: 10px 0px;
+    border-radius: 35px;
+    text-transform: uppercase;
+    background-color: #1a1f71;
+    color: #fff;
+    font-weight: 700;
+    -webkit-box-shadow: 0px 0px 22px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 22px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 22px 5px rgba(0,0,0,0.2);
 }
