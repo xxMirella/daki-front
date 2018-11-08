@@ -1,0 +1,22 @@
+
+  
+#login {
+    background-color: #4B54CE;
+    min-height: 100vh;
+}
+
+.flex {
+    padding: 10px 0px;
+}
+
+.eita {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.form-group label {
+    text-transform: uppercase;
+    font-weight: 700;
+}
