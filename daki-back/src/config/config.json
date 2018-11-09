@@ -1,1 +1,9 @@
-DB_HOST = 'mongodb://localhost:27017/daki';
+{
+  "dbConfig": {
+    "HOST": "mongodb://localhost:27017/daki"
+  },
+  "serverConfig": {
+    "PORT": 4000,
+    "HOST": "localhost"
+  }
+}
