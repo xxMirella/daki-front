@@ -1,0 +1,127 @@
+<form #signUpForm="ngForm">
+  <div>
+    <label for="name">Nome:</label>
+    <br>
+    <input type="text" id="name" name="name" [(ngModel)]="newUser.name" #name="ngModel" minlength="5" maxlength="40"
+      required>
+    <div *ngIf="name?.touched">
+      <div *ngIf="name?.errors?.required">
+        O campo nome é obrigatório
+      </div>
+      <div *ngIf="name?.errors?.minlength">
+        O campo título deve ter ao menos 5 caracteres
+      </div>
+      <div *ngIf="name?.errors?.maxlength">
+        O campo título deve ter ao máximo 40 caracteres
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="dob">Data de nascimento:</label>
+    <br>
+    <input type="date" id="dob" name="dob" [(ngModel)]="newUser.dob" #dob="ngModel" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" max="" required>
+    <div *ngIf="dob?.touched">
+      <div *ngIf="dob?.errors?.required">
+        <br>
+        O campo data de nascimento é obrigatório
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="phone">Celular</label>
+    <br>
+    <input type="text" id="phone" name="phone" mask="(00) 00000-0000" [(ngModel)]="newUser.phone" #phone="ngModel" [dropSpecialCharacters]="true" required>
+    <div *ngIf="phone?.touched">
+      <div *ngIf="phone?.errors?.required">
+        O campo celular é obrigatório
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="cep">CEP</label>
+    <br>
+    <input type="text" id="cep" name="cep" mask="00000-000" [(ngModel)]="newUser.cep" #cep="ngModel" [dropSpecialCharacters]="true" (blur)="validateCep()" required>
+    <div *ngIf="cep?.touched">
+      <div *ngIf="cep?.errors?.required">
+        O campo CEP é obrigatório
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="neighborhood">Bairro</label>
+    <br>
+    <input type="text" id="neighborhood" name="neighborhood" [(ngModel)]="newUser.neighborhood" #neighborhood="ngModel" required>
+    <div *ngIf="neighborhood?.touched">
+      <div *ngIf="neighborhood?.errors?.required">
+        O campo bairro é obrigatório
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="city">Cidade</label>
+    <br>
+    <input type="text" id="city" name="city" [(ngModel)]="newUser.city" #city="ngModel" required>
+    <div *ngIf="city?.touched">
+      <div *ngIf="city?.errors?.required">
+        O campo bairro é obrigatório
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="state">Estado</label>
+    <br>
+    <input type="text" id="state" name="state" [(ngModel)]="newUser.state" #state="ngModel" required>
+    <div *ngIf="state?.touched">
+      <div *ngIf="state?.errors?.required">
+        O campo estado é obrigatório
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="email">E-mail</label>
+    <br>
+    <input type="email" id="email" name="email" [(ngModel)]="newUser.email" #email="ngModel" [email]="true" required>
+    <div *ngIf="email?.touched">
+      <div *ngIf="email?.errors?.required">
+        O campo e-mail é obrigatório
+      </div>
+      <div *ngIf="email?.errors?.email">
+        O e-mail não é válido
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Senha</label>
+    <br>
+    <input type="password" id="password" name="password" [(ngModel)]="newUser.password" #password="ngModel" minlength="8" required>
+    <div *ngIf="password?.touched">
+      <div *ngIf="password?.errors?.required">
+        O campo senha é obrigatório
+      </div>
+      <div *ngIf="email?.errors?.minlength">
+        O e-mail deve conter ao menos 8 caracteres
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="password_confirm">Confirmar Senha</label>
+    <br>
+    <input type="password" id="password_confirm" name="password_confirm" [(ngModel)]="newUser.password_confirm" #password_confirm="ngModel" minlength="8" required>
+    <div *ngIf="password_confirm?.touched">
+      <div *ngIf="password_confirm != password">
+        As senhas devem ser iguais
+      </div>
+    </div>
+  </div>
+  <br>
+  <button [disabled]="signUpForm.invalid" (click)="signUp()">Cadastrar</button>
+</form>

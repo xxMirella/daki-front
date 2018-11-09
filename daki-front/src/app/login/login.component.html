@@ -1,0 +1,31 @@
+<form #loginForm="ngForm">
+  <div>
+    <label for="email">E-mail:</label>
+    <br>
+    <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" [email]="true" required>
+    <div *ngIf="email?.touched">
+      <div *ngIf="email?.errors?.required">
+        O campo e-mail é obrigatório
+      </div>
+      <div *ngIf="email?.errors?.email">
+        O e-mail não é válido
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Senha</label>
+    <br>
+    <input type="password" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" minlength="8" required>
+    <div *ngIf="password?.touched">
+      <div *ngIf="password?.errors?.required">
+        O campo senha é obrigatório
+      </div>
+      <div *ngIf="email?.errors?.minlength">
+        O e-mail deve conter ao menos 8 caracteres
+      </div>
+    </div>
+  </div>
+  <br>
+  <button [disabled]="loginForm.invalid" (click)="logIn()">Entrar</button>
+</form>
