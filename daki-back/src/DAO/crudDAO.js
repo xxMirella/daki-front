@@ -6,8 +6,8 @@ export class CrudDAO {
     this.key = key;
   }
 
-  async post(item) {
-    return await this.model.create(item)
+  post(item) {
+    return this.model.create(item)
       .then((modelInstance) => {
         let response = {};
         response[this.modelName] = modelInstance;
@@ -15,8 +15,8 @@ export class CrudDAO {
       });
   }
 
-  async list(query = {}, pagination = { ignore: 0 , limit: 10}) {
-    return await this.model
+  list(query = {}, pagination = { ignore: 0 , limit: 10}) {
+    return this.model
       .find({})
       .skip(pagination.ignore)
       .limit(pagination.limit)
@@ -27,11 +27,10 @@ export class CrudDAO {
       });
   }
 
-  async delete(id) {
+  delete(id) {
     const filter = {};
     filter[this.key] = id;
-
-    return await this.model.deleteOne({ _id: id })
+    return this.model.deleteOne({ _id: id })
   }
 
   update(id, item) {
