@@ -1,5 +1,3 @@
-
-  
 #login {
     background-image: url('../assets/bg/bg-home.jpg');
     background-position: left bottom;
@@ -10,10 +8,12 @@
     
 }
 
+
 .flex {
     padding: 10px 0px;
     min-height: 100vh;
 }
+
 
 .login-board {
     max-width: 500px;
