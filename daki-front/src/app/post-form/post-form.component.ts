@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { PostService } from '../post.service';
-import { ElementRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
+export interface Type {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-post-form',
@@ -9,6 +14,17 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./post-form.component.css']
 })
 export class PostFormComponent {
+
+  get type(): any { return this.form.get('type').value; }
+  get comercioHidden(): any { return this.form.get('type').value !== 'comercio'; }
+  get contatoHidden(): any { return ((this.form.get('type').value === 'comercio') || (this.form.get('type').value === 'troca')) }
+  get hourHidden(): any { return ((this.form.get('type').value === 'evento') || (this.form.get('type').value === 'troca')) }
+  types: Type[] = [
+    { value: 'alerta', viewValue: 'Alerta' },
+    { value: 'comercio', viewValue: 'Comércio' },
+    { value: 'evento', viewValue: 'Evento' },
+    { value: 'troca', viewValue: 'Troca' }
+  ];
 
   post: Post = {
     id: 0,
@@ -30,11 +46,11 @@ export class PostFormComponent {
 
   constructor(private postService: PostService, private fb: FormBuilder) {
     this.createForm();
-   }
+  }
 
-  sendPost(event){
+  sendPost(event) {
     event.preventDefault();
-    
+
     this.postService.addPost(this.form.value).subscribe(
       value => {
         alert("Novo post adicionado com sucesso!")
@@ -62,7 +78,7 @@ export class PostFormComponent {
 
   onFileChange(event) {
     let reader = new FileReader();
-    if(event.target.files && event.target.files.length > 0) {
+    if (event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
