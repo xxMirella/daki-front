@@ -1,13 +1,20 @@
 const mongoose = require('mongoose');
+const boom = require('boom');
 
-export class Database {
+class Database {
 
   constructor(host) {
     this.host = host;
   }
 
-  static connect() {
-    mongoose.connect('mongodb://localhost:27017/daki', { useNewUrlParser: true });
-    return mongoose.connection;
+  connect() {
+    try {
+      mongoose.connect(this.host, { useNewUrlParser: true });
+      return mongoose.connection;
+    } catch (error) {
+      return boom.internal();
+    }
   }
 }
+
+module.exports = Database;
