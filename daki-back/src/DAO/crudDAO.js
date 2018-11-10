@@ -1,9 +1,13 @@
-export class CrudDAO {
+class CrudDAO {
 
   constructor(model, key) {
     this.model = model;
     this.modelName = model.modelName.toLowerCase();
     this.key = key;
+  }
+
+  get(item) {
+    return this.model.find(item)
   }
 
   post(item) {
@@ -37,3 +41,5 @@ export class CrudDAO {
     return this.model.updateOne({ _id: id }, { $set: item })
   }
 }
+
+module.exports = CrudDAO;
