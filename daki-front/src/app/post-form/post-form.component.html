@@ -1,0 +1,42 @@
+<h1>Novo Post</h1>
+
+<form [formGroup]="form">
+  <div>
+    <label for="type">Type</label>
+    <select formControlName="type" required #type>
+      <option *ngFor="let t of types" [value]="t.value">{{t.viewValue}}</option>
+    </select>
+  </div>
+  <div>
+    <label for="title">Titlee</label>
+    <input type="text" formControlName="title" required minlength="5" #title>
+    {{contatoHidden}}
+    {{comercioHidden}}
+  </div>
+  <div>
+    <label for="description">Description</label>
+    <input type="text" formControlName="description" required minlength="20" #description>
+  </div>
+  <div>
+    <label for="">Address</label>
+    <input type="text" formControlName="address" required minlength="10" #address>
+  </div>
+  <div *ngIf="comercioHidden">
+    <label for="date">Date</label>
+    <input type="date" formControlName="date" required #date>
+  </div>
+  <div *ngIf="hourHidden">
+    <label for="hour">Hour</label>
+    <input type="time" formControlName="hour" #hour required>
+  </div>
+  <div *ngIf=contatoHidden>
+    <label for="contact">Contact</label>
+    <input type="text" formControlName="contact" #contact required>
+  </div>
+  <div>
+    <label for="foto">Foto</label>
+    <input type="file" id="foto" (change)="onFileChange($event)" #fileInput>
+    <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+  </div>
+  <input type="submit" [disabled]="form.invalid || loading" (click)="sendPost($event)">
+</form>
