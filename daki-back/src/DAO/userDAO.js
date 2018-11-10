@@ -1,9 +1,10 @@
-'use strict';
-const crudDAO = require('crudDAO');
-const user = require('../models/userModel');
+const crudDAO = require('./crudDAO');
+const User = require('../models/userModel');
 
 class UserDAO extends crudDAO {
   constructor() {
-    super(user, _id);
+    super(User, _id);
   }
 }
+
+module.exports = UserDAO;
