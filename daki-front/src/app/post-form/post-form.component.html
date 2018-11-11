@@ -1,40 +1,50 @@
-<h1>Novo Post</h1>
+<section id="post-form">
+  <article class="container">
+      <h2>Novo Post</h2>
 
-<form [formGroup]="form">
-  <div>
-    <label for="type">Type</label>
-    <select formControlName="type" required #type>
-      <option *ngFor="let t of types" [value]="t.value">{{t.viewValue}}</option>
-    </select>
-  </div>
-  <div>
-    <label for="title">Titlee</label>
-    <input type="text" formControlName="title" required minlength="5" #title>
-  </div>
-  <div>
-    <label for="description">Description</label>
-    <input type="text" formControlName="description" required minlength="20" #description>
-  </div>
-  <div>
-    <label for="">Address</label>
-    <input type="text" formControlName="address" minlength="10" #address>
-  </div>
-  <div *ngIf="comercioHidden">
-    <label for="date">Date</label>
-    <input type="date" formControlName="date" #date>
-  </div>
-  <div *ngIf="hourHidden">
-    <label for="hour">Hour</label>
-    <input type="time" formControlName="hour" #hour>
-  </div>
-  <div *ngIf=contatoHidden>
-    <label for="contact">Contact</label>
-    <input type="text" formControlName="contact" #contact>
-  </div>
-  <div>
-    <label for="foto">Foto</label>
-    <input type="file" id="foto" (change)="onFileChange($event)" #fileInput>
-    <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
-  </div>
-  <input type="submit" [disabled]="form.invalid || loading" (click)="sendPost($event)">
-</form>
+      <form [formGroup]="form">
+        <div>
+          <label for="type">Type</label>
+          <select formControlName="type" required #type>
+            <option *ngFor="let t of types" [value]="t.value">{{t.viewValue}}</option>
+          </select>
+        </div>
+        <div>
+          <label for="title">Titlee</label>
+          <input type="text" formControlName="title" required minlength="5" #title>
+        </div>
+        <div>
+          <label for="description">Description</label>
+          <input type="text" formControlName="description" required minlength="20" #description>
+        </div>
+        <div>
+          <label for="">Address</label>
+          <input type="text" formControlName="address" minlength="10" #address>
+        </div>
+        <div *ngIf="comercioHidden">
+          <label for="date">Date</label>
+          <input type="date" formControlName="date" #date>
+        </div>
+        <div *ngIf="hourHidden">
+          <label for="hour">Hour</label>
+          <input type="time" formControlName="hour" #hour>
+        </div>
+        <div *ngIf=contatoHidden>
+          <label for="contact">Contact</label>
+          <input type="text" formControlName="contact" #contact>
+        </div>
+        <div>
+          <label for="foto">Foto</label>
+          <input type="file" id="foto" (change)="onFileChange($event)" #fileInput>
+          <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+        </div>
+        <input type="submit" [disabled]="form.invalid || loading" (click)="sendPost($event)">
+      </form>
+    
+
+  </article>
+
+
+
+</section>
+
