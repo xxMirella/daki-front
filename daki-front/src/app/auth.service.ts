@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthService {
+  isAuthenticated(): any {
+    throw new Error("Method not implemented.");
+  }
   // private SIGNUP_URL = '';
   // private LOGIN_URL = '';
   // private ACCOUNT_INFO_URL = '';
@@ -26,31 +29,31 @@ export class AuthService {
     phone: string,
     email: string,
     password: string
-    ) {
-      return this.http.post(this.SIGNUP_URL,
-        {
-          // name: name,
-          // dob: dob,
-          // cep: cep,
-          // neighborhood: neighborhood,
-          // city: city,
-          // state: state,
-          // phone: phone,
-          email: email,
-          password: password
-        });
-    }
-
-    login(email: string, password: string) {
-      return this.http.post(this.LOGIN_URL, {
+  ) {
+    return this.http.post(this.SIGNUP_URL,
+      {
+        // name: name,
+        // dob: dob,
+        // cep: cep,
+        // neighborhood: neighborhood,
+        // city: city,
+        // state: state,
+        // phone: phone,
         email: email,
         password: password
       });
-    }
+  }
 
-    checkToken(idToken: string) {
-      return this.http.post(this.ACCOUNT_INFO_URL, {
-        idToken: idToken,
-      });
-    }
+  login(email: string, password: string) {
+    return this.http.post(this.LOGIN_URL, {
+      email: email,
+      password: password
+    });
+  }
+
+  checkToken(idToken: string) {
+    return this.http.post(this.ACCOUNT_INFO_URL, {
+      idToken: idToken,
+    });
+  }
 }
