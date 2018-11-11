@@ -15,8 +15,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { PostItemComponent } from './post-item/post-item.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostFormComponent } from './post-form/post-form.component';
+import { AuthGuard } from './auth.guard';
+import { HomeComponent } from './home/home.component';
+
 
 const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'posts', component: PostListComponent },
@@ -30,7 +34,8 @@ const appRoutes: Routes = [
     SignupComponent,
     PostItemComponent,
     PostListComponent,
-    PostFormComponent
+    PostFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -48,4 +53,4 @@ const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,37 +1,30 @@
 <nav class="navbar navbar-expand-lg">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="../assets/icon/menu.png" alt="menu">
-    </button>
-    <div *ngIf="!(loggedUser$ | async); else userData">
-      <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavAltMarkup">
-          <ul class="navbar-nav">
-            <li class="nav-item nav-link"><a routerLink="/">Home</a></li>
-            <li class="nav-item nav-link"><a routerLink="/login">Entrar</a></li>
-            <li class="nav-item nav-link"><a routerLink="/signup">Cadastrar</a></li>
-          </ul>
-        </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <img src="../assets/icon/menu.png" alt="menu">
+  </button>
+  <div *ngIf="!(loggedUser$ | async); else userData">
+    <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+        <li class="nav-item nav-link"><a routerLink="/">Home</a></li>
+        <li class="nav-item nav-link"><a routerLink="/login">Entrar</a></li>
+        <li class="nav-item nav-link"><a routerLink="/signup">Cadastrar</a></li>
+      </ul>
     </div>
-    <ng-template #userData>
-      <a class="navbar-profile" href="#">
-        <img src="../assets/icon/profile.png" alt="perfil">
-      </a>
-      <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavAltMarkup">
-        <ul class="navbar-nav">
-          <li class="nav-item nav-link nav-item-name"><a routerLink="/">!!nome!!</a></li>
-          <li class="nav-item nav-link"><a href="#">Perfil</a></li>
-          <li class="nav-item nav-link"><a href="#">Criar Postagem</a></li>
-          <li class="nav-item nav-link"><a href="#">Favoritos</a></li>
-          <li class="nav-item nav-link nav-item-logout"><a (click)="logout()">Sair</a></li>
-        </ul>
-      </div>
-    </ng-template>
-  </nav>
-  <router-outlet></router-outlet>
-  <app-post-form></app-post-form>
-
-
-
-
-
-
-
+  </div>
+  <ng-template #userData>
+    <a class="navbar-profile" href="#">
+      <img src="../assets/icon/profile.png" alt="perfil">
+    </a>
+    <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+        <li class="nav-item nav-link nav-item-name"><a routerLink="/">!!nome!!</a></li>
+        <li class="nav-item nav-link"><a href="#">Perfil</a></li>
+        <li class="nav-item nav-link"><a href="/posts/add">Criar Postagem</a></li>
+        <li class="nav-item nav-link"><a href="#">Favoritos</a></li>
+        <li class="nav-item nav-link nav-item-logout"><a (click)="logout()">Sair</a></li>
+      </ul>
+    </div>
+  </ng-template>
+</nav>
+<router-outlet></router-outlet>

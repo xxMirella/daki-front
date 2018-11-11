@@ -1,3 +1,5 @@
+@import url('..\app.component.css');
+
 input.ng-touched.ng-valid {
   border: 2px solid green;
 }
