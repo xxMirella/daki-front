@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const CommentsSchema = require('./commentsModel');
+const UserSchema = require('./userModel');
 
 const postTypes = [
   'Events',
@@ -9,8 +10,11 @@ const postTypes = [
 ];
 
 let PostSchema = mongoose.Schema({
-  type:         postTypes,
+  user:        UserSchema,
+  type:        { type: postTypes, required: true },
+  image:       { type: String },
   title:       { type: String, required: true },
+  userLocal:   { type: String, required: true },
   address:     { type: String },
   date:        { type: Date },
   link:        { type: String, required: true },

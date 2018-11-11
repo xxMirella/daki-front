@@ -1,9 +1,10 @@
 const databaseMongo = require('./config/database');
 const serverHapi = require('./config/server');
 const config = require('./config/config');
-const auth = require('./routes/authRoute');
+const Auth = require('./routes/authRoute');
 
 async function main() {
+  const auth = new Auth();
   const db = new databaseMongo(config.dbConfig.HOST);
   await db.connect();
 

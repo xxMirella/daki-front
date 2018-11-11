@@ -1,20 +1,24 @@
-const Jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const userDao = require('../DAO/userDAO');
 const boom = require('boom');
+const utils = require('../common/utils');
 
 class AuthRoute {
 
-  static login() {
+  constructor() {
+    this.userDao = new userDao();
+  }
+
+  login() {
     return {
       method: 'POST',
       path: '/auth/login',
       handler: async (req) => {
         const { email, password } = req.payload;
-        if (email.toLowerCase() !== userDao.get(email) || password.toLowerCase() !== userDao.get(password)) {
+        if (email.toLowerCase() !== this.userDao.get(email) || password.toLowerCase() !== this.userDao.get(password)) {
           return boom.unauthorized('Email ou senha incorreto!');
         }
-        return this.createToken(email);
+        return AuthRoute.createToken(email);
       },
       config: {
         auth: false,
@@ -33,45 +37,24 @@ class AuthRoute {
     }
   }
 
-  static signUP() {
+  signUP() {
     return {
       method: 'POST',
       path: '/auth/signUp',
       handler: async (req) => {
-        try {
-          const user = userDao.post(req.payload);
-          return this.createToken(user);
-        } catch (error) {
-          console.log('Error on post', error);
-          return boom.internal();
-        }
+        return await this.userDao.postUser(req.payload);
       },
       config: {
         auth: false,
         tags: ['api'],
         description: 'Cadastra um novo usuário',
         validate: {
-          payload: this.validateUserPayload(),
+          payload: utils.validateUserPayload(),
         }
       }
     }
   }
 
-  static validateUserPayload() {
-    return {
-      profilePhoto: Joi.string(),
-      name: Joi.string().required(),
-      birthDay: Joi.date().required(),
-      district: Joi.string().required(),
-      email: Joi.string().required(),
-      password: Joi.string().required(),
-    };
-  }
-
-  static createToken(userInfo) {
-    const token = Jwt.sign(userInfo, JWT_KEY);
-    return { token };
-  }
 }
 
 module.exports = AuthRoute;

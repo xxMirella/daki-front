@@ -11,24 +11,14 @@ class CrudDAO {
   }
 
   post(item) {
-    return this.model.create(item)
-      .then((modelInstance) => {
-        let response = {};
-        response[this.modelName] = modelInstance;
-        return response;
-      });
+    return this.model.create(item);
   }
 
-  list(query = {}, pagination = { ignore: 0 , limit: 10}) {
+  list(query, pagination = { ignore: 0 , limit: 10}) {
     return this.model
-      .find({})
+      .find(query)
       .skip(pagination.ignore)
-      .limit(pagination.limit)
-      .then((modelInstance) => {
-        let response = {};
-        response[this.modelName] = modelInstance;
-        return response;
-      });
+      .limit(pagination.limit);
   }
 
   delete(id) {

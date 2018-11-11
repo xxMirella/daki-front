@@ -3,7 +3,7 @@ const commentsModel = require('../models/commentsModel');
 
 class CommentsDAO extends crudDAO {
   constructor() {
-    super(commentsModel, _id);
+    super(commentsModel, '_id');
   }
 }
 

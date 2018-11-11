@@ -3,7 +3,7 @@ const postModel = require('../models/postModel');
 
 class PostDAO extends crudDAO {
   constructor() {
-    super(postModel, _id);
+    super(postModel, '_id');
   }
 }
 

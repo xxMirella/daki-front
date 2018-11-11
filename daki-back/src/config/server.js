@@ -8,7 +8,7 @@ const hapiJwt = require('hapi-auth-jwt2');
 const swaggerConfig = {
   info: {
     title: 'API Daki Social Network',
-    version: '1.0',
+    version: '1.1',
   },
   lang: 'pt'
 };
