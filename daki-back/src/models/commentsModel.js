@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const UserSchema = require('./userModel');
+const ObjectId = mongoose.Schema.ObjectId;
 
 let CommentsSchema = new mongoose.Schema({
-  user:        UserSchema,
+  userId:      { type: ObjectId, required: true },
+  userName:    { type: String, required: true },
   text:        { type: String, required: true },
   publishedAt: { type: Date, default: new Date() }
 });

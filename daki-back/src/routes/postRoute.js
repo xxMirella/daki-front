@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const postDAO = require('../DAO/postDAO');
-const commentsDAO = require('../DAO/commentsDAO');
 const boom = require('boom');
 const utils = require('../common/utils');
 
@@ -9,22 +8,24 @@ class PostRoute {
 
   constructor() {
     this.posts = new postDAO();
-    this.comments = new commentsDAO();
   }
 
   static validatePosts() {
     return {
-      user:        utils.validateUserPayload(),
+      userId:      Joi.string().required(),
+      userName:    Joi.string().required(),
       type:        Joi.string().required(),
       image:       Joi.string(),
       title:       Joi.string().required(),
       userLocal:   Joi.string().required(),
       address:     Joi.string(),
-      date:        Joi.date(),
+      date:        Joi.string(),
+      hour:        Joi.string(),
       link:        Joi.string(),
       like:        Joi.boolean(),
       description: Joi.string(),
       createdAt:   Joi.date(),
+      contact:     Joi.string(),
     }
   }
 
@@ -36,15 +37,49 @@ class PostRoute {
         return await this.posts.post(req.payload);
       },
       config: {
-        auth: false,
         tags: ['api'],
-        description: 'Cadastra um novo usuário',
+        description: 'Cadastra um novo post',
         validate: {
           payload: PostRoute.validatePosts(),
         }
       }
     }
   }
+
+  get() {
+    return {
+      method: 'GET',
+      path: '/timeline/posts',
+      handler: async (req, h) => {
+        try {
+          const { limit, ignore } = req.query;
+          return await this.posts.list({}, ignore, limit);
+        } catch (err) {
+          return Boom.internal();
+        }
+      },
+      config: {
+        tags: ['api'],
+        description: 'Lista publicacoes paginadas',
+        notes: 'Pode paginar, com limte e itens a ignorar',
+        validate: {
+          headers: utils.validateHeaders(),
+          failAction: (request, h, err) => {
+            throw err;
+          },
+        },
+        query: {
+          ignore: Joi.number()
+            .integer()
+            .default(0),
+
+            limit: Joi.number()
+            .integer()
+            .default(10),
+        },
+      },
+    }
+  };
 
 }
 

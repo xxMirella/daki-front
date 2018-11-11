@@ -8,7 +8,8 @@ let UserModel = new mongoose.Schema({
   phone:        { type: String },
   birthDay:     { type: Date, required: true },
   email:        { type: String, required: true, index: { unique: true } },
-  password:     { type: String, required: true }
+  password:     { type: String, required: true },
+  favPostsID:   { type: Array }
 });
 
 module.exports = mongoose.model('User', UserModel, 'users');

@@ -50,7 +50,7 @@ class ServerHapi {
       }
     });
 
-    this.server.auth.default('jwt');
+    await this.server.auth.default('jwt');
     await this.server.start();
     console.log('Server running at: ' + this.server.info.uri);
   }

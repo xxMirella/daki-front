@@ -2,9 +2,11 @@ const databaseMongo = require('./config/database');
 const serverHapi = require('./config/server');
 const config = require('./config/config');
 const Auth = require('./routes/authRoute');
+const Post = require('./routes/postRoute');
 
 async function main() {
   const auth = new Auth();
+  const posts = new Post();
   const db = new databaseMongo(config.dbConfig.HOST);
   await db.connect();
 
@@ -16,7 +18,9 @@ async function main() {
 
   const routes = [
     auth.login(),
-    auth.signUP()
+    auth.signUP(),
+    posts.post(),
+    posts.get(),
   ];
 
   await server.init(routes);

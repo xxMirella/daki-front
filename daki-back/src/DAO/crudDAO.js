@@ -7,28 +7,27 @@ class CrudDAO {
   }
 
   get(item) {
-    return this.model.find(item)
+    return this.model.find(item).then();
   }
 
   post(item) {
-    return this.model.create(item);
+    return this.model.create(item).then();
   }
 
   list(query, pagination = { ignore: 0 , limit: 10}) {
     return this.model
       .find(query)
       .skip(pagination.ignore)
-      .limit(pagination.limit);
+      .limit(pagination.limit)
+      .then()
   }
 
   delete(id) {
-    const filter = {};
-    filter[this.key] = id;
-    return this.model.deleteOne({ _id: id })
+    return this.model.deleteOne({ _id: id }).then();
   }
 
   update(id, item) {
-    return this.model.updateOne({ _id: id }, { $set: item })
+    return this.model.updateOne({ _id: id }, { $set: item }).then();
   }
 }
 
