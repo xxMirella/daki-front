@@ -5,14 +5,11 @@
 }
 
 @media (min-width: 768px) {
-  .navbar-nav::before {
-    display: none;
-  }
-  .nav-item-name {
-    display: none;
-  }
-  .navbar-profile{
-    padding-left: 30px !important; 
+  .navbar-collapse {
+    position: relative !important;
+    top: 0px !important;
+    padding: 0px !important;
+    background-color: transparent !important;
   }
 }
 
@@ -34,25 +31,18 @@
   height: auto;
 }
 
-.navbar-nav {
-  position: relative;
-  padding-right: 30px;
-}
-
-.navbar-nav::before {
-  content: '';
-  width: 100vw;
+.navbar-collapse{
   background-color: #1A1F71;
-  height: 100%;
   position: absolute;
-  right: -1rem;
-  bottom: -0.5rem;
+  top: 65px;
+  left: 0px;
+  z-index: 999;
+  padding: 10px 0px 10px 30px;
+  min-width: 80vw;
 }
 
 .nav-item {
   padding: 20px 0px;
-  z-index: 999;
-  text-align: right;
 }
 
 .nav-item a {
