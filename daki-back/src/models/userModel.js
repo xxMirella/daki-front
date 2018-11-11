@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const schema = mongoose.Schema;
-const LocalSchema = require('./localModel');
+const AddressSchema = require('./addressModel');
 
-const UserModel = new schema({
+let UserModel = new mongoose.Schema({
   profilePhoto: { type: String },
-  local:        LocalSchema,
+  address:      AddressSchema,
   name:         { type: String, required: true },
   phone:        { type: String },
   birthDay:     { type: Date, required: true },
