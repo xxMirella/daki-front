@@ -3,12 +3,17 @@
     <label for="email">E-mail:</label>
     <br>
     <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" [email]="true" required>
-    <div *ngIf="email?.touched">
+    <div *ngIf="email?.touched || email?.dirty">
       <div *ngIf="email?.errors?.required">
         O campo e-mail é obrigatório
       </div>
       <div *ngIf="email?.errors?.email">
         O e-mail não é válido
+      </div>
+    </div>
+    <div *ngIf="email?.pristine || email?.untouched">
+      <div *ngIf="email?.errors?.required">
+        O campo e-mail é obrigatório
       </div>
     </div>
   </div>
@@ -21,11 +26,11 @@
       <div *ngIf="password?.errors?.required">
         O campo senha é obrigatório
       </div>
-      <div *ngIf="email?.errors?.minlength">
+      <div *ngIf="password?.errors?.minlength">
         O e-mail deve conter ao menos 8 caracteres
       </div>
     </div>
   </div>
   <br>
-  <button [disabled]="loginForm.invalid" (click)="logIn()">Entrar</button>
+  <button [disabled]="!loginForm.valid" (click)="logIn()">Entrar</button>
 </form>
