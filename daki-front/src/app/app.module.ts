@@ -11,6 +11,8 @@ import { PostItemComponent } from './post-item/post-item.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostFormComponent } from './post-form/post-form.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserMenuComponent } from './user-menu/user-menu.component';
 
 const appRoutes: Routes = [{
   path: '', component: HomeComponent,
@@ -18,6 +20,10 @@ const appRoutes: Routes = [{
   path: 'register', component: RegisterComponent
 }, {
   path: 'login', component: LoginComponent
+}, {
+  path: 'menu', component: UserMenuComponent
+}, {
+  path: 'profile', component: UserProfileComponent
 }, {
   path: 'posts', component: PostListComponent
 }, {
@@ -30,10 +36,12 @@ const appRoutes: Routes = [{
     AppComponent,
     RegisterComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
     PostItemComponent,
     PostListComponent,
-    PostFormComponent
+    PostFormComponent,
+    UserProfileComponent,
+    UserMenuComponent
   ],
   imports: [
     BrowserModule,

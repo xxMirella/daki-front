@@ -1,0 +1,71 @@
+@import url('..\app.component.css');
+
+#profile {
+    background-image: url('../../assets/bg/bg-general.png');
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #ffffff;
+}
+
+.profile-board{
+    max-width: 500px;
+    min-width: 310px;
+    background-color: #e0ecff;
+    padding: 15px;
+    height: 340px;
+    border-radius: 2%;
+}
+
+.container-info {
+    position: relative;
+    bottom: 50px;
+    right: 20px;
+    left: 3px;
+    line-height: 30px; 
+}
+
+.profile-fields {
+    color: rgb(89, 89, 189);
+    justify-content: center; 
+    font-size: 10pt;
+}
+
+.profile-info {
+    margin-left: 10%;
+    justify-content: center;
+    font-size: 10pt;
+}
+
+
+img {
+    border-radius: 50%;
+    position: absolute;
+    top: -70px;
+    left: 70%;
+    right: 0;
+    bottom: 0;
+}
+
+.image-container {
+    width: 40%;
+    height: 40%;
+    position: relative;
+}
+
+/* resize images */
+.image-resize {
+    width: 120px;
+    height: 120px; 
+}
+
+.title-name {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15pt;
+    color: blue;
+    position: relative;
+    bottom: 15px;
+}

@@ -1,0 +1,13 @@
+.menu-board{
+    width: 100%;
+    background-color: #e0ecff;
+    height: 200px;
+}
+
+img {
+    height: 130px;
+    position: relative;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+}
