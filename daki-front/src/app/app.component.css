@@ -4,6 +4,18 @@
   position: relative;
 }
 
+@media (min-width: 768px) {
+  .navbar-nav::before {
+    display: none;
+  }
+  .nav-item-name {
+    display: none;
+  }
+  .navbar-profile{
+    padding-left: 30px !important; 
+  }
+}
+
 .collapsing {
   transition: none;
 }
