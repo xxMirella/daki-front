@@ -1,36 +1,51 @@
-<form #loginForm="ngForm">
-  <div>
-    <label for="email">E-mail:</label>
-    <br>
-    <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" [email]="true" required>
-    <div *ngIf="email?.touched || email?.dirty">
-      <div *ngIf="email?.errors?.required">
-        O campo e-mail é obrigatório
-      </div>
-      <div *ngIf="email?.errors?.email">
-        O e-mail não é válido
-      </div>
-    </div>
-    <div *ngIf="email?.pristine || email?.untouched">
-      <div *ngIf="email?.errors?.required">
-        O campo e-mail é obrigatório
-      </div>
-    </div>
-  </div>
+<section id="login">
+  <article class="container">
+    <div class="d-flex justify-content-center align-items-center flex">
+      <div class="login-board">
+        <a href="#"><img src="../../assets/icon/left-arrow.png" alt="" class="icon-voltar "></a>
 
-  <div>
-    <label for="password">Senha</label>
-    <br>
-    <input type="password" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" minlength="8" required>
-    <div *ngIf="password?.touched">
-      <div *ngIf="password?.errors?.required">
-        O campo senha é obrigatório
-      </div>
-      <div *ngIf="password?.errors?.minlength">
-        O e-mail deve conter ao menos 8 caracteres
+        <form #loginForm="ngForm">
+          <div class="form-group">
+            <label for="email">E-mail:</label>
+            <br>
+            <input class="form-control" type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel"
+              [email]="true" required>
+            <div *ngIf="email?.touched || email?.dirty">
+              <div *ngIf="email?.errors?.required">
+                O campo e-mail é obrigatório
+              </div>
+              <div *ngIf="email?.errors?.email">
+                O e-mail não é válido
+              </div>
+            </div>
+            <div *ngIf="email?.pristine || email?.untouched">
+              <div *ngIf="email?.errors?.required">
+                O campo e-mail é obrigatório
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <br>
+            <input class="form-control" type="password" id="password" name="password" [(ngModel)]="user.password"
+              #password="ngModel" minlength="8" required>
+            <div *ngIf="password?.touched">
+              <div *ngIf="password?.errors?.required">
+                O campo senha é obrigatório
+              </div>
+              <div *ngIf="password?.errors?.minlength">
+                O e-mail deve conter ao menos 8 caracteres
+              </div>
+            </div>
+          </div>
+          <br>
+          <button lass="btn" [disabled]="!loginForm.valid" (click)="logIn()">Entrar</button>
+          <div class="form-group">
+            <a class="link-password" href="">Esqueci a senha</a>
+          </div>
+
+        </form>
       </div>
     </div>
-  </div>
-  <br>
-  <button [disabled]="!loginForm.valid" (click)="logIn()">Entrar</button>
-</form>
+  </article>
