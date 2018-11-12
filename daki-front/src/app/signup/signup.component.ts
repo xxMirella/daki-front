@@ -100,7 +100,7 @@ export class SignupComponent implements OnInit {
                 birthDay: value.user[0].birthDay,
                 district: value.user[0].district
               }
-          });
+          }});
           localStorage.setItem('userToken', value.TokenLogin.token);
 
           this.router.navigateByUrl('/');
