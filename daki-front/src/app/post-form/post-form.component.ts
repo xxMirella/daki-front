@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { PostService } from '../post.service';
 import { ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
+
 
 export interface Type {
   value: string;
@@ -44,7 +46,10 @@ export class PostFormComponent {
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(private postService: PostService, private fb: FormBuilder) {
+  constructor(
+    private postService: PostService,
+    private fb: FormBuilder,
+    private router: Router) {
     this.createForm();
   }
 
@@ -53,7 +58,8 @@ export class PostFormComponent {
 
     this.postService.addPost(this.form.value).subscribe(
       value => {
-        alert("Novo post adicionado com sucesso!")
+        alert("Novo post adicionado com sucesso!");
+        this.router.navigateByUrl('/posts');
       },
       error => {
         alert("Seu novo post não foi adicionado, verifique o formulário!")

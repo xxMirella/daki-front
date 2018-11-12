@@ -1,4 +1,4 @@
-export class CrudDAO {
+class CrudDAO {
 
   constructor(model, key) {
     this.model = model;
@@ -6,34 +6,37 @@ export class CrudDAO {
     this.key = key;
   }
 
-  post(item) {
-    return this.model.create(item)
-      .then((modelInstance) => {
-        let response = {};
-        response[this.modelName] = modelInstance;
-        return response;
-      });
+  get(item) {
+    return this.model.find(item).then();
   }
 
-  list(query = {}, pagination = { ignore: 0 , limit: 10}) {
+  post(item) {
+    return this.model.create(item).then();
+  }
+
+  list(query, pagination = { ignore: 0 , limit: 10}) {
     return this.model
-      .find({})
+      .find(query)
       .skip(pagination.ignore)
       .limit(pagination.limit)
-      .then((modelInstance) => {
-        let response = {};
-        response[this.modelName] = modelInstance;
-        return response;
-      });
+      .then()
   }
 
-  delete(id) {
-    const filter = {};
-    filter[this.key] = id;
-    return this.model.deleteOne({ _id: id })
+  delete(criteria, item) {
+    return this.model.deleteOne(criteria, item).then();
+  }
+
+  push(id, item) {
+    return  this.model.updateOne(id, { $push: item })
+  }
+
+  pull(id, item) {
+    return this.model.updateOne(id, { $pull: item});
   }
 
   update(id, item) {
-    return this.model.updateOne({ _id: id }, { $set: item })
+    return this.model.updateOne({ _id: id }, { $set: item }).then();
   }
 }
+
+module.exports = CrudDAO;
