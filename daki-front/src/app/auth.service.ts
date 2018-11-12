@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthService {
-  private SIGNUP_URL = '';
-  private LOGIN_URL = '';
+  private SIGNUP_URL = 'http://localhost:4000/auth/signUp';
+  private LOGIN_URL = 'http://localhost:4000/auth/login';
   private ACCOUNT_INFO_URL = '';
 
   constructor(
