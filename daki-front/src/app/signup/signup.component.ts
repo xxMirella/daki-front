@@ -1,3 +1,5 @@
+import { retryWhen, flatMap } from 'rxjs/operators';
+import { Observable, interval, throwError, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -32,6 +34,16 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
+  http_retry(maxRetry: number = 2, delayMs: number = 1000) {
+    return (src: Observable<any>) => src.pipe(
+      retryWhen(_ => {
+        return interval(delayMs).pipe(
+          flatMap(count => count == maxRetry ? src : of(count))
+        );
+      })
+    );
+  }
+
   validateCep() {
     this.viacep.buscarPorCep(this.newUser.cep).then(( endereco: Endereco ) => {
       this.newUser.neighborhood = endereco.bairro;
@@ -43,35 +55,40 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
-    console.log(this.newUser);
+    /*
+      this.newUser.city,
+      this.newUser.state,
+      this.newUser.phone,
+    */
 
     this.authService.signup(
       this.newUser.name,
       this.newUser.dob,
       this.newUser.cep,
       this.newUser.neighborhood,
-      this.newUser.city,
-      this.newUser.state,
-      this.newUser.phone,
       this.newUser.email,
       this.newUser.password
     ).subscribe((value: any) => {
       this.store.dispatch({
         type: 'SET_USER',
         payload: {
-          token: value.idToken,
+          token: value.TokenLogin.token,
           user: {
-            email: value.email,
-            localId: value.localId
+            localId: value.response._id,
+            name: value.response.name,
+            email: value.response.email,
+            profilePhoto: value.response.profilePhoto,
+            birthDay: value.response.birthDay,
+            district: value.response.district
           }
         }
       });
-      localStorage.setItem('userToken', value.idToken);
+      localStorage.setItem('userToken', value.TokenLogin.token);
 
       this.router.navigateByUrl('/');
     }, error => {
-      console.log(error);
-      console.log(error.error);
+      // console.log(error);
+      // console.log(error.error);
 
       switch (error.error.error.message) {
         case 'EMAIL_EXISTS':

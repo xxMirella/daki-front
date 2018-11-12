@@ -1,4 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -15,12 +15,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { PostItemComponent } from './post-item/post-item.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostFormComponent } from './post-form/post-form.component';
+import { ErrorComponent } from './error/error.component';
+
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'posts', component: PostListComponent },
   { path: 'posts/add', component: PostFormComponent },
+  { path: 'error', component: ErrorComponent },
+
   { path: '**', redirectTo: '' }
 ];
 @NgModule({
@@ -30,7 +34,8 @@ const appRoutes: Routes = [
     SignupComponent,
     PostItemComponent,
     PostListComponent,
-    PostFormComponent
+    PostFormComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

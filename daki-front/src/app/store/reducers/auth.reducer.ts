@@ -4,7 +4,12 @@ import { AuthService } from 'src/app/auth.service';
 export interface AuthState {
   user: {
     localId: string,
-    email: string
+    name: string,
+    email: string,
+    profilePhoto: string,
+    birthDay: string,
+    district: string
+
   };
 
   token: string;
