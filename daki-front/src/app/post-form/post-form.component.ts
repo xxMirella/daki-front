@@ -34,7 +34,7 @@ export class PostFormComponent {
     description: '',
     address: '',
     date: '',
-    foto: null,
+    image: null,
     like: 0,
     type: '',
     contact: '',
@@ -73,7 +73,7 @@ export class PostFormComponent {
       description: '',
       address: '',
       date: '',
-      foto: null,
+      image: null,
       like: 0,
       type: '',
       contact: '',
@@ -88,7 +88,7 @@ export class PostFormComponent {
       let file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
-        this.form.get('foto').setValue({
+        this.form.get('image').setValue({
           filename: file.name,
           filetype: file.type,
           value: reader.result.toString().split(',')[1]
@@ -98,7 +98,7 @@ export class PostFormComponent {
   }
 
   clearFile() {
-    this.form.get('foto').setValue(null);
+    this.form.get('image').setValue(null);
     this.fileInput.nativeElement.value = '';
   }
 
