@@ -1,6 +1,6 @@
 <div class="card-holder">
   <div class='card-basic'>
-    <img src="https://picsum.photos/200/300" class="image-spacer" />
+    <span *ngIf="isValidImg(item)">Img: <img [src]="getImage(item)"></span>
     <div class="bg-color" [ngStyle]="{'background-color':getTypeColor(item.type)}">
       <h4>{{ title }}</h4>
       <div class='icons'>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -11,20 +12,18 @@ export class CardComponent implements OnInit {
   // title = ''
   @Input() item
   @Input() userId
+  private image;
   faHeart = faHeart;
   faStar = faStar;
-  type = ''
+  type: string = ''
   subtitle = '';
   title = '';
   id = '';
-  class = ''
-  bgColor = ''
+  class = '';
   isFav: boolean = false
 
-  constructor(private router: Router) {
-    console.log(this.item);
-    // this.title = Data.title
-    // console.log(this.title)
+  constructor(
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -52,22 +51,15 @@ export class CardComponent implements OnInit {
   clickLike(id) {
     console.log('like', this.item.id, this.item.userId)
     event.stopPropagation();
-    let initVars = {
-
+    this.item.like = !this.item.like
+    const request = {
+      userId: this.item.userId,
+      postId: this.item.id
     }
 
-    fetch('POST /user/like/posts', initVars)
-      .then(response => response.json())
-      .then(json => {
-        this.cards = json
-        console.log('cards return json ', this.cards)
-      })
-
-
-    //capturar o postID
-    //capturar o userID da store global
-    //fazer uma chamada para a API
-
+    fetch('http://localhost:3000/posts', {
+      body: JSON.stringify(request)
+    })
   }
 
   clickFav() {
@@ -75,12 +67,14 @@ export class CardComponent implements OnInit {
     event.stopPropagation();
 
     this.item.fav = !this.item.fav
-    fetch('http://localhost:3000/posts', initVars)
-      .then(response => response.json())
-      .then(json => {
-        this.cards = json
-        console.log('cards return json ', this.cards)
-      })
+    const request = {
+      userId: this.item.userId,
+      postId: this.item.id
+    }
+
+    fetch('http://localhost:3000/posts', {
+      body: JSON.stringify(request)
+    })
   }
 
   getTypeColor(type) {
@@ -94,5 +88,15 @@ export class CardComponent implements OnInit {
       case "Alert":
         return 'var(--danger)'
     }
+  }
+
+  isValidImg(item) {
+    return item.image.value;
+  }
+
+  getImage(item) {
+    this.image = `data:${item.image.filetype};base64,${item.image.value}`
+    console.log(this.image + " " + (item.image.value))
+    return this.image;
   }
 }
