@@ -79,7 +79,7 @@ class PostRoute {
       method: 'GET',
       path: '/timeline/posts',
       handler: async (req, h) => {
-        const {limit, ignore} = req.query;
+        const { limit, ignore } = req.query;
         return await this.postsDao.list({}, ignore, limit);
       },
       config: {
@@ -162,30 +162,6 @@ class PostRoute {
     };
   };
 
-  userFavPosts() {
-    return {
-      method: 'POST',
-      path: '/timeline/auth/favs',
-      handler: async (req) => {
-        const { email, password } = req.payload;
-        return userManager.validateUser(email, password);
-      },
-      config: {
-        auth: false,
-        tags: ['api'],
-        description: 'Deve gerar um token para o usuario',
-        validate: {
-          payload: {
-            email: Joi.string()
-              .required(),
-            password: Joi.string()
-              .max(100)
-              .required(),
-          }
-        }
-      }
-    }
-  }
 }
 
 module.exports = PostRoute;
