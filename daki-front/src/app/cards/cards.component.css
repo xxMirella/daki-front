@@ -1,0 +1,9 @@
+
+@media (min-width: 600px) {
+.cards-box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: 960px;
+}
+}

@@ -1,0 +1,62 @@
+<section id="post-form">
+    <article class="container">
+      <div class="form-board col-12 col-md-8 offset-md-2">
+        <img src="" alt="">
+          <h2>Novo Post</h2>
+          <form [formGroup]="form" #form="ngForm">
+            <div class="form-group">
+              <label for="type">Como será sua postagem?</label>
+              <select formControlName="type" required #type class="form-control" >
+                <option *ngFor="let t of types" [value]="t.value" class="form-control" >{{t.viewValue}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="title">Título</label>
+              <input type="text"  class="form-control" formControlName="title" required minlength="5" #title placeholder="Digite o título">
+              
+
+              <div *ngIf="title?.errors?.required">
+                O campo título é obrigatório.
+              </div>
+      
+              <div *ngIf="title?.errors?.minlength">
+                O campo título tem que ter no mínimo 5 caracteres.
+              </div>
+
+            </div>
+            <div class="form-group">
+                <label for="">Localização</label>
+                <input type="text" class="form-control" formControlName="address" minlength="10" #address placeholder="Digite o local e localização">
+              </div>
+            <div class="form-group"> 
+              <label for="description">Descrição</label>
+              <textarea type="textarea" class="form-control" formControlName="description" required minlength="20" #description placeholder="Digite sua descrição" rows="5"></textarea>
+            </div>
+  
+            <div *ngIf="comercioHidden" class="form-group">
+              <label for="date">Data</label>
+              <input type="date" class="form-control" formControlName="date" #date >
+            </div>
+
+            <div *ngIf="hourHidden" class="form-group" >
+              <label for="hour">Horário</label>
+              <input type="time" class="form-control" formControlName="hour" #hour>
+            </div>
+            <div *ngIf=contatoHidden class="form-group">
+              <label for="contact">Contato</label>
+              <input type="text" class="form-control" formControlName="contact" #contact>
+            </div>
+            <div class="form-group file">
+              <label for="foto">
+                Clique aqui para upload de imagem <img src="/../assets/icon/upload.png" alt="">
+              </label>
+              <input type="file" id="foto" (change)="onFileChange($event)" #fileInput class="form-control btn">
+              <button type="button" class="btn btn-clear" (click)="clearFile()">clear file</button>
+            </div>
+            <input type="submit" [disabled]="form.invalid || loading" (click)="sendPost($event)" class="btn-submit btn">
+          </form>
+      </div>
+    </article>
+  </section>
+  
+  

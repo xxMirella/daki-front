@@ -1,0 +1,48 @@
+<section id="login">
+  <article class="container">
+    <div class="d-flex justify-content-center align-items-center flex">
+      <div class="login-board col-12 col-sm-10 col-md-6 col-lg-4">
+        <a href="#"><img src="../../assets/icon/left-arrow.png" alt="" class="icon-voltar "></a>
+
+        <form #loginForm="ngForm">
+          <div class="form-group">
+            <label for="email">E-mail:</label>
+            <br>
+            <input class="form-control" type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel"
+              [email]="true" required placeholder="Digite seu e-mail">
+            <div *ngIf="email?.touched || email?.dirty" >
+              <div *ngIf="email?.errors?.required" class="error-message">
+                O campo e-mail é obrigatório
+              </div>
+              <div *ngIf="email?.errors?.email" class="error-message">
+                O e-mail não é válido
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Senha: </label>
+            <br>
+            <input class="form-control" type="password" id="password" name="password" [(ngModel)]="user.password"
+              #password="ngModel" minlength="8" required placeholder="********">
+            <div *ngIf="password?.touched">
+              <div *ngIf="password?.errors?.required" class="error-message">
+                O campo senha é obrigatório
+              </div>
+              <div *ngIf="password?.errors?.minlength" class="error-message">
+                A senha deve conter ao menos 8 caracteres
+              </div>
+            </div>
+          </div>
+          <br>
+          <button class="btn" id="logInBtn" [disabled]="!loginForm.valid" (click)="logIn()">Entrar</button>
+          <div class="form-group">
+            <a class="link-password" href="">Esqueci a senha</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  <!-- </div> -->
+  <br>
+  </article>
