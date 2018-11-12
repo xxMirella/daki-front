@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class CardComponent implements OnInit {
   // title = ''
   @Input() item
+  @Input() userId
   faHeart = faHeart;
   faStar = faStar;
   type = ''
@@ -48,12 +49,38 @@ export class CardComponent implements OnInit {
     this.router.navigate([`/post/${this.item.id}`])
   }
 
-  clickLike() {
-    this.item.like = !this.item.like
+  clickLike(id) {
+    console.log('like', this.item.id, this.item.userId)
+    event.stopPropagation();
+    let initVars = {
+
+    }
+
+    fetch('POST /user/like/posts', initVars)
+      .then(response => response.json())
+      .then(json => {
+        this.cards = json
+        console.log('cards return json ', this.cards)
+      })
+
+
+    //capturar o postID
+    //capturar o userID da store global
+    //fazer uma chamada para a API
+
   }
 
   clickFav() {
+    console.log('fav', this.item.id, this.item.userId)
+    event.stopPropagation();
+
     this.item.fav = !this.item.fav
+    fetch('http://localhost:3000/posts', initVars)
+      .then(response => response.json())
+      .then(json => {
+        this.cards = json
+        console.log('cards return json ', this.cards)
+      })
   }
 
   getTypeColor(type) {

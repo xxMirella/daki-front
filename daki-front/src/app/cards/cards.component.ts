@@ -11,18 +11,31 @@ import { Router, NavigationExtras } from '@angular/router';
 
 export class CardsListComponent implements OnInit {
   public cards: any
+  public userId: any
 
   @Input() Post: CardComponent
 
   constructor(private router: Router) {
     // https://jsonplaceholder.typicode.com/posts
-    fetch('http://localhost:3000/posts')
-      .then(response => response.json())
-      .then(json => {
-        this.cards = json
-        console.log('cards return json ', this.cards)
-      })
+    //Acessar global store
+    this.userId = 10;
+    let customHeader = new Headers();
+    let initVars = {
+      headers: customHeader,
+      method: 'GET'
+    }
 
+    //get from store 
+    // callback() {
+      customHeader.append("userId", this.userId)
+
+      fetch('http://localhost:3000/posts', initVars)
+        .then(response => response.json())
+        .then(json => {
+          this.cards = json
+          console.log('cards return json ', this.cards)
+        })
+    // }
   }
 
   navigateToPost(index) {
