@@ -12,14 +12,14 @@ export class CardComponent implements OnInit {
   // title = ''
   @Input() item
   @Input() userId
+  private image;
   faHeart = faHeart;
   faStar = faStar;
-  type = ''
+  type: string = ''
   subtitle = '';
   title = '';
   id = '';
-  class = ''
-  bgColor = ''
+  class = '';
   isFav: boolean = false
 
   constructor(
@@ -88,5 +88,15 @@ export class CardComponent implements OnInit {
       case "Alert":
         return 'var(--danger)'
     }
+  }
+
+  isValidImg(item) {
+    return item.image.value;
+  }
+
+  getImage(item) {
+    this.image = `data:${item.image.filetype};base64,${item.image.value}`
+    console.log(this.image + " " + (item.image.value))
+    return this.image;
   }
 }
