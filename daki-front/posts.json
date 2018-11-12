@@ -52,7 +52,7 @@
       "id": 3,
       "userId": 1,
       "userName": "Fábio Assunção",
-      "type": "Event",
+      "type": "Events",
       "image": "http://heroku.com/HASH_MONGO.jpg",
       "title": "Festa lá em casa 2",
       "address": "Rua Dias Gomes, 440 - Ap 35",

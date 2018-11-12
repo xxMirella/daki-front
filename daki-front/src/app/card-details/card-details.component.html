@@ -16,9 +16,9 @@
     <p>Data: {{ date }}</p>
     <p>Horário: {{ hour }}</p>
     <p>Local: {{ address }}</p>
-  </div>
-  <div class='back'>
-    <fa-icon class='arrow' class="icon-stroke" [icon]="faArrowLeft"></fa-icon>
-    <p (click)='goToHome()'>VOLTAR</p>
+    <div class='back'>
+      <fa-icon class="arrow" [icon]="faArrowLeft"></fa-icon>
+      <span (click)='goToHome()'> VOLTAR</span>
+    </div>
   </div>
 </div>

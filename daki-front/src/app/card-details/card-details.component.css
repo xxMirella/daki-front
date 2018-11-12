@@ -108,12 +108,12 @@
 
 .back {
   box-sizing: border-box;
-  background-color: #EBECFF;
   padding: 2rem 2rem 2rem 1rem;
   margin-top: 1rem;
+  color: black;
 }
 
-.back p{
+.back p {
   display: inline-block;
   width: 30%;
   padding-left: 0.5rem;

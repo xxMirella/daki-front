@@ -58,7 +58,7 @@ export class CardComponent implements OnInit {
 
   getTypeColor(type) {
     switch (type) {
-      case "Event":
+      case "Events":
         return 'var(--event-color)'
       case "Exchange":
         return 'var(--exchange-color)'
