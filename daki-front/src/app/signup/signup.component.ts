@@ -84,6 +84,7 @@ export class SignupComponent implements OnInit {
         this.newUser.local.city,
         this.newUser.local.country,
       )
+      .pipe(this.http_retry())
       .subscribe(
         (value: any) => {
           console.log(value);
@@ -92,37 +93,23 @@ export class SignupComponent implements OnInit {
             payload: {
               token: value.TokenLogin.token,
               user: {
-                localId: value.response._id,
-                name: value.response.name,
-                email: value.response.email,
-                profilePhoto: value.response.profilePhoto,
-                birthDay: value.response.birthDay,
-                district: value.response.district
+                localId: value.user[0]._id,
+                name: value.user[0].name,
+                email: value.user[0].email,
+                profilePhoto: value.user[0].profilePhoto,
+                birthDay: value.user[0].birthDay,
+                district: value.user[0].district
               }
-            }
           });
           localStorage.setItem('userToken', value.TokenLogin.token);
 
           this.router.navigateByUrl('/');
         },
         error => {
-          console.log(error);
+          // console.log(error);
           // console.log(error.error);
+          alert(error.error.message);
 
-          switch (error.error.error.message) {
-            case 'EMAIL_EXISTS':
-              alert('E-mail já existente');
-              break;
-            case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-              alert('Muitas tentativas, tente novamente mais tarde');
-              break;
-            case 'WEAK_PASSWORD':
-              alert('A senha deve ter no mínimo 6 caracteres');
-              break;
-            default:
-              alert('Houve um erro');
-              break;
-          }
         }
       );
   }
