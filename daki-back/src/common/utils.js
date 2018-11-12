@@ -1,10 +1,11 @@
 const Joi = require('joi');
 const Jwt = require('jsonwebtoken');
 const config = require('../config/config');
+const boom = require('boom');
 
 
 class Utils {
-
+  
   static validateHeaders() {
     return Joi.object({ authorization: Joi.string().required() }).unknown();
   }

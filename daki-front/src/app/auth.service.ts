@@ -15,20 +15,30 @@ export class AuthService {
 
   signup(
     name: string,
-    dob: string,
-    cep: string,
-    neighborhood: string,
+    birthDay: string,
     email: string,
-    password: string
+    password: string,
+    phone: string,
+    cep: string,
+    street: string,
+    district: string,
+    city: string,
+    country: string,
   ) {
     return this.http.post(this.SIGNUP_URL,
       {
         name: name,
-        dob: dob,
-        cep: cep,
-        neighborhood: neighborhood,
+        birthDay: birthDay,
         email: email,
-        password: password
+        password: password,
+        phone: phone,
+        local: {
+          cep: cep,
+          street: street,
+          district: district,
+          city: city,
+          country: country
+        }
       });
   }
 

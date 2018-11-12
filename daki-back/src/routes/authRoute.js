@@ -32,7 +32,7 @@ class AuthRoute {
         }
       }
     }
-  }
+  };
 
   signUP() {
     return {
@@ -51,6 +51,34 @@ class AuthRoute {
       }
     }
   }
+
+  getMe() {
+    return {
+      method: 'GET',
+      path: '/auth/{id}',
+      handler: async (req, h) => {
+        try {
+          const { id } = req.params;
+          return await this.userDao.get({_id: id});
+        } catch (err) {
+          console.log(err)
+        }
+      },
+      config: {
+        tags: ['api'],
+        description: 'Retorna as informações do usuário',
+        notes: 'O usuário precisa estar logado',
+        validate: {
+          headers: utils.validateHeaders(),
+          params: {
+            id: Joi.string()
+              .max(200)
+              .required(),
+          },
+        },
+      },
+    };
+  };
 
 }
 

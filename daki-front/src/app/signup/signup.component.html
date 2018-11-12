@@ -23,12 +23,12 @@
           </div>
 
           <div class="form-group">
-            <label for="dob">Data de nascimento:</label>
+            <label for="birthDay">Data de nascimento:</label>
             <br>
-            <input class="form-group" type="date" id="dob" name="dob" [(ngModel)]="newUser.dob" #dob="ngModel" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+            <input class="form-group" type="date" id="birthDay" name="birthDay" [(ngModel)]="newUser.birthDay" #birthDay="ngModel" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
               max="" required>
-            <div *ngIf="dob?.touched">
-              <div *ngIf="dob?.errors?.required">
+            <div *ngIf="birthDay?.touched">
+              <div *ngIf="birthDay?.errors?.required">
                 <br>
                 O campo data de nascimento é obrigatório
               </div>
@@ -50,7 +50,7 @@
           <div class="form-group">
             <label for="cep">CEP</label>
             <br>
-            <input class="form-group" type="text" id="cep" name="cep" mask="00000-000" [(ngModel)]="newUser.cep" #cep="ngModel"
+            <input class="form-group" type="text" id="cep" name="cep" mask="00000-000" [(ngModel)]="newUser.local.cep" #cep="ngModel"
               [dropSpecialCharacters]="true" (blur)="validateCep()" required>
             <div *ngIf="cep?.touched">
               <div *ngIf="cep?.errors?.required">
@@ -62,7 +62,7 @@
           <div class="form-group">
             <label for="neighborhood">Bairro</label>
             <br>
-            <input class="form-group" type="text" id="neighborhood" name="neighborhood" [(ngModel)]="newUser.neighborhood"
+            <input class="form-group" type="text" id="neighborhood" name="neighborhood" [(ngModel)]="newUser.local.district"
               #neighborhood="ngModel" required>
             <div *ngIf="neighborhood?.touched">
               <div *ngIf="neighborhood?.errors?.required">
@@ -74,7 +74,7 @@
           <div class="form-group">
             <label for="city">Cidade</label>
             <br>
-            <input class="form-group" type="text" id="city" name="city" [(ngModel)]="newUser.city" #city="ngModel"
+            <input class="form-group" type="text" id="city" name="city" [(ngModel)]="newUser.local.city" #city="ngModel"
               required>
             <div *ngIf="city?.touched">
               <div *ngIf="city?.errors?.required">
@@ -86,7 +86,7 @@
           <div class="form-group">
             <label for="state">Estado</label>
             <br>
-            <input class="form-group" type="text" id="state" name="state" [(ngModel)]="newUser.state" #state="ngModel"
+            <input class="form-group" type="text" id="state" name="state" [(ngModel)]="stateInput" #state="ngModel"
               required>
             <div *ngIf="state?.touched">
               <div *ngIf="state?.errors?.required">
@@ -128,8 +128,7 @@
           <div class="form-group">
             <label for="password_confirm">Confirmar Senha</label>
             <br>
-            <input class="form-group" type="password" id="password_confirm" name="password_confirm" [(ngModel)]="newUser.password_confirm"
-              #password_confirm="ngModel" minlength="8" required>
+            <input class="form-group" type="password" id="password_confirm" name="password_confirm" [(ngModel)]="password_confirmInput" #password_confirm="ngModel" minlength="8" required>
             <div *ngIf="password_confirm?.touched">
               <div *ngIf="password_confirm != password">
                 As senhas devem ser iguais
