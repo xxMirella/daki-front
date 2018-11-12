@@ -31,12 +31,23 @@ class UserDAO extends crudDAO {
     const postsDao = new Posts();
     const userPosts = await this.get({_id: userId});
     const favPosts = [];
-
-    for ( let postId of userPosts[0].favPostsID ) {
-      const posts = await postsDao.get({_id: postId});
-      favPosts.push(posts);
+    if (userPosts <= 0 || userPosts[0] === undefined) {
+      return boom.notFound('Post favorito ou usuário não encontrados!');
+    } else {
+      for ( let postId of userPosts[0].favPostsID ) {
+        const posts = await postsDao.get({_id: postId});
+        favPosts.push(posts);
+      }
+      return favPosts;
     }
-    return favPosts;
+
+  }
+
+  async deleteFavPost(userId, postId) {
+    const userPosts = await this.get({favPostsID: postId});
+    if ( userPosts.length >= 0 ) {
+      return await this.pull({_id: userId}, {favPostsID: postId});
+    }
   }
 
 }

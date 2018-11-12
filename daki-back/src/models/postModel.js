@@ -21,7 +21,7 @@ let PostSchema = new mongoose.Schema({
   date:        { type: String },
   hour:        { type: String },
   link:        { type: String, required: true },
-  likeUserId:  { type: Array },
+  likeUserIds: { type: Array },
   comments:    CommentsSchema,
   description: { type: String, required: true },
   contact:     { type: String },

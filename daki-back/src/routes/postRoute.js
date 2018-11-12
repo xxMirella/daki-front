@@ -108,11 +108,11 @@ class PostRoute {
   delete() {
     return {
       method: 'DELETE',
-      path: '/timeline/posts/{id}',
+      path: '/timeline/posts/{postId}',
       handler: async (request, h) => {
         try {
-          const {id} = request.params;
-          return await this.postsDao.delete(id);
+          const { postId } = request.params;
+          return await this.postsDao.delete({_id: postId});
         } catch (err) {
           console.log(err);
         }
@@ -124,7 +124,7 @@ class PostRoute {
         validate: {
           headers: utils.validateHeaders(),
           params: {
-            id: Joi.string()
+            postId: Joi.string()
               .max(200)
               .required(),
           },
@@ -136,11 +136,11 @@ class PostRoute {
   put() {
     return {
       method: 'PUT',
-      path: '/timeline/posts/{id}',
+      path: '/timeline/posts/{postId}',
       handler: async (request, h) => {
         try {
-          const {id} = request.params;
-          return await this.postsDao.update(id, request.payload);
+          const { postId } = request.params;
+          return await this.postsDao.update(postId, request.payload);
         } catch (err) {
           console.log(err);
         }
@@ -152,7 +152,7 @@ class PostRoute {
         validate: {
           headers: utils.validateHeaders(),
           params: {
-            id: Joi.string()
+            postId: Joi.string()
               .max(200)
               .required(),
           },
