@@ -1,16 +1,15 @@
-'use strict';
 const mongoose = require('mongoose');
-const media = require('./mediaModel');
-const district = require('./districtModel');
-const schema = mongoose.Schema;
+const AddressSchema = require('./addressModel');
 
-const UserModel = new schema({
-  profilePhoto: media,
-  district:     district,
+let UserModel = new mongoose.Schema({
+  profilePhoto: { type: String },
+  address:      AddressSchema,
   name:         { type: String, required: true },
+  phone:        { type: String },
   birthDay:     { type: Date, required: true },
   email:        { type: String, required: true, index: { unique: true } },
-  password:     { type: String, required: true }
+  password:     { type: String, required: true },
+  favPostsID:   { type: Array }
 });
 
 module.exports = mongoose.model('User', UserModel, 'users');
