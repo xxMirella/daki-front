@@ -1,7 +1,6 @@
 const Joi = require('joi');
 const Jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const boom = require('boom');
 
 
 class Utils {
@@ -20,9 +19,17 @@ class Utils {
     }
   }
 
+  static validateImagePayload() {
+    return {
+      value:    Joi.string(),
+      fileType: Joi.string(),
+      fileName: Joi.string()
+    }
+  }
+
   static validateUserPayload() {
     return {
-      profilePhoto: Joi.string(),
+      profilePhoto: this.validateImagePayload(),
       name:         Joi.string().required(),
       birthDay:     Joi.date().required(),
       email:        Joi.string().required(),
