@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { Router, NavigationExtras } from '@angular/router';
-
+import { Store } from '@ngrx/store';
+import { AuthState } from '../store/reducers/auth.reducer';
 
 @Component({
   selector: 'app-cards-list',
@@ -15,26 +16,33 @@ export class CardsListComponent implements OnInit {
 
   @Input() Post: CardComponent
 
-  constructor(private router: Router) {
-    // https://jsonplaceholder.typicode.com/posts
-    //Acessar global store
-    this.userId = 10;
+  constructor(
+    private router: Router,
+    private state: Store<AuthState>) {
+
     let customHeader = new Headers();
     let initVars = {
       headers: customHeader,
       method: 'GET'
     }
 
+    state.select('auth').subscribe(v => {
+      if (v.user) {
+        this.userId = v.user.localId;
+        customHeader.append("userId", this.userId)
+      }
+    });
+
     //get from store 
     // callback() {
-      customHeader.append("userId", this.userId)
+    // customHeader.append("userId", this.userId)}
 
-      fetch('http://localhost:3000/posts', initVars)
-        .then(response => response.json())
-        .then(json => {
-          this.cards = json
-          console.log('cards return json ', this.cards)
-        })
+    fetch('http://localhost:3000/posts', initVars)
+      .then(response => response.json())
+      .then(json => {
+        this.cards = json
+        console.log('cards return json ', this.cards)
+      })
     // }
   }
 

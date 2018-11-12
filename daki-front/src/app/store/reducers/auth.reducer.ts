@@ -34,6 +34,10 @@ export function authReducer (state = initialState, action: any) {
       user: null,
       token: null,
     };
+    case 'GET_USER':
+    state = {
+      
+    }
     break;
   }
 

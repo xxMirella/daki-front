@@ -7,11 +7,11 @@
     </div>
     <div class='icons'>
       <span (click)='clickFav()'>
-        <fa-icon class="icon-stroke" [icon]="faHeart" [ngClass]=" item.like ? 'fillon' : 'filloff'"></fa-icon>
+        <fa-icon class="icon-stroke" [icon]="faStar" [ngClass]=" item.like ? 'fillon' : 'filloff'"></fa-icon>
       </span>
       <span (click)='clickLike()'>
         <fa-icon class="
-          icon-stroke" [icon]="faStar" [ngClass]="item.like ? 'fillon' : 'filloff'" *ngIf="isFav"></fa-icon>
+          icon-stroke" [icon]="faHeart" [ngClass]="item.like ? 'fillon' : 'filloff'" *ngIf="isFav"></fa-icon>
       </span>
     </div>
   </div>
