@@ -19,8 +19,11 @@ async function main() {
   const routes = [
     auth.login(),
     auth.signUP(),
+    auth.getMe(),
     posts.post(),
     posts.get(),
+    posts.delete(),
+    posts.put(),
   ];
 
   await server.init(routes);
