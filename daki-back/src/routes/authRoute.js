@@ -50,7 +50,7 @@ class AuthRoute {
         }
       }
     }
-  }
+  };
 
   getMe() {
     return {

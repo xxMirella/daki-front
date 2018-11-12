@@ -1,5 +1,6 @@
 const crudDAO = require('./crudDAO');
 const User = require('../models/userModel');
+const Posts = require('../DAO/postDAO');
 const boom = require('boom');
 const utils = require('../common/utils');
 
@@ -24,6 +25,18 @@ class UserDAO extends crudDAO {
         "TokenLogin": utils.createToken(email),
       }
     }
+  }
+
+  async getFavPosts(userId) {
+    const postsDao = new Posts();
+    const userPosts = await this.get({_id: userId});
+    const favPosts = [];
+
+    for ( let postId of userPosts[0].favPostsID ) {
+      const posts = await postsDao.get({_id: postId});
+      favPosts.push(posts);
+    }
+    return favPosts;
   }
 
 }
