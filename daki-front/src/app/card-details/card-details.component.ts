@@ -10,9 +10,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CardDetailsComponent implements OnInit {
   // title = ''
   @Input() item
+  private image;
   userName: string = '';
   type: string = '';
-  image: string = '';
+  // image: string = '';
   title: string = '';
   address: string = '';
   date: string = '';
@@ -84,6 +85,15 @@ export class CardDetailsComponent implements OnInit {
     this.router.navigate([''])
   }
 
+  isValidImg(item) {
+    return item.image.value;
+  }
+
+  getImage(item) {
+    this.image = `data:${item.image.filetype};base64,${item.image.value}`
+    console.log(this.image + " " + (item.image.value))
+    return this.image;
+  }
 }
 
 
