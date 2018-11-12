@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostFormComponent } from './post-form/post-form.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
+import { TimelineComponent } from './timeline/timeline.component';
 
 const appRoutes: Routes = [{
   path: '', component: HomeComponent,
@@ -41,7 +42,8 @@ const appRoutes: Routes = [{
     PostListComponent,
     PostFormComponent,
     UserProfileComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,
