@@ -1,0 +1,7 @@
+<div>
+  ID: {{post.id}}
+  Título: {{post.title}}
+  Descrição: {{post.description}}
+  Tipo: {{post?.type}}
+  <span *ngIf="isValidImg(post)">Img: <img [src]="getImage(post)"></span>
+</div>
