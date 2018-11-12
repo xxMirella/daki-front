@@ -84,6 +84,7 @@ export class SignupComponent implements OnInit {
         this.newUser.local.city,
         this.newUser.local.country,
       )
+      .pipe(this.http_retry())
       .subscribe(
         (value: any) => {
           console.log(value);
