@@ -1,16 +1,40 @@
-<div>
-  <!-- <a routerLink="/">Home</a> -->
-  <div *ngIf="!(loggedUser$ | async); else userData">
-    <a routerLink="/">Home</a> | <a routerLink="/login">Login</a> | <a routerLink="/signup">Sign Up</a>
-  </div>
-  <ng-template #userData>
-    <a routerLink="/">Home</a>
-    <div>
-      Hi, {{ (loggedUser$ | async).email}}
-      <br>
-      <button (click)="logout()">Log Out</button>
+<nav class="navbar navbar-expand-lg">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="../assets/icon/menu.png" alt="menu">
+    </button>
+    <div *ngIf="!(loggedUser$ | async); else userData">
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <ul class="navbar-nav">
+            <li class="nav-item nav-link"><a routerLink="/">Home</a></li>
+            <li class="nav-item nav-link"><a routerLink="/login">Entrar</a></li>
+            <li class="nav-item nav-link"><a routerLink="/signup">Cadastrar</a></li>
+          </ul>
+        </div>
+
     </div>
-  </ng-template>
-</div>
-<!-- <a routerLink="/">Home</a> | <a routerLink="/login">Login</a> | <a routerLink="/signup">Sign Up</a> -->
-<router-outlet></router-outlet>
+    <ng-template #userData>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li class="nav-item nav-link nav-item-name"><a routerLink="/">!!nome!!</a></li>
+          <li class="nav-item nav-link"><a href="#">Perfil</a></li>
+          <li class="nav-item nav-link"><a href="#">Criar Postagem</a></li>
+          <li class="nav-item nav-link"><a href="#">Favoritos</a></li>
+          <li class="nav-item nav-link nav-item-logout"><a (click)="logout()">Sair</a></li>
+          <li>
+            <a class="navbar-profile" href="#">
+              <img src="../assets/icon/profile.png" alt="perfil">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </ng-template>
+  </nav>
+  <router-outlet></router-outlet>
+  <app-post-form></app-post-form>
+
+
+
+
+
+
+

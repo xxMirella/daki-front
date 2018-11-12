@@ -20,28 +20,28 @@ export class AuthService {
     neighborhood: string,
     email: string,
     password: string
-    ) {
-      return this.http.post(this.SIGNUP_URL,
-        {
-          name: name,
-          dob: dob,
-          cep: cep,
-          neighborhood: neighborhood,
-          email: email,
-          password: password
-        });
-    }
-
-    login(email: string, password: string) {
-      return this.http.post(this.LOGIN_URL, {
+  ) {
+    return this.http.post(this.SIGNUP_URL,
+      {
+        name: name,
+        dob: dob,
+        cep: cep,
+        neighborhood: neighborhood,
         email: email,
         password: password
       });
-    }
+  }
 
-    checkToken(idToken: string) {
-      return this.http.post(this.ACCOUNT_INFO_URL, {
-        idToken: idToken,
-      });
-    }
+  login(email: string, password: string) {
+    return this.http.post(this.LOGIN_URL, {
+      email: email,
+      password: password
+    });
+  }
+
+  checkToken(idToken: string) {
+    return this.http.post(this.ACCOUNT_INFO_URL, {
+      idToken: idToken,
+    });
+  }
 }
