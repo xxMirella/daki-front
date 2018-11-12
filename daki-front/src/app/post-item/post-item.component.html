@@ -1,7 +1,60 @@
-<div>
+<div id="post-item">
+  <div class="card-item">
+    <!-- <span *ngIf="isValidImg(post)">Img: <img [src]="getImage(post)"></span> -->
+
+    <img src="/../assets/test/teste-img.jpg" alt="">
+
+    <div class="post-type" >
+      <h2 class="title">Título: {{post.title}}</h2>
+      <p class="text-right">16/12/2018</p>
+    </div>
+  </div>
+</div>
+
+<div id="post-detail">
+    <div class="card-item">
+      <!-- <span *ngIf="isValidImg(post)">Img: <img [src]="getImage(post)"></span> -->
+  
+      <img src="/../assets/test/teste-img.jpg" alt="">
+  
+      <div class="post-type" >
+        <h2 class="title">Título: {{post.title}}</h2>
+      </div>
+
+    
+      <div class="box-description">
+        <div class="user">
+            <img src="/../assets/test/avatar.png" alt="">
+            <p>Fabricio Santos</p>
+        </div>
+
+        <p class="description">Venha saborear uma deliciosa feijoada com uma boa música e diversão. {{post.description}}</p>
+
+        <div class="date-hour d-flex justify-content-between">
+          <p class="date"> Data: 16/12/2018 </p>
+          <p class="date"> Hora: 12:00 - 23:00 </p>
+        </div>
+
+        <div class="address">
+          <p>Local: Bar do Zé - Rua Homero Batista, 524</p>
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+<!-- <div> 
   ID: {{post.id}}
   Título: {{post.title}}
   Descrição: {{post.description}}
   Tipo: {{post?.type}}
   <span *ngIf="isValidImg(post)">Img: <img [src]="getImage(post)"></span>
-</div>
+</div> -->

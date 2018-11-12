@@ -1,5 +1,13 @@
-<ul>
-  <li *ngFor="let post of posts">
-    <app-post-item [post]="post"></app-post-item>
-  </li>
- </ul>
+<section id="post-list">
+  <article class="container">
+    <ul class="col-12 col-md-8 offset-md-2">
+        <li *ngFor="let post of posts">
+          <app-post-item [post]="post"></app-post-item>
+        </li>
+        
+        <app-post-item [post]="post"></app-post-item>
+    </ul>
+  </article>
+
+
+</section>
