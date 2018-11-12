@@ -1,3 +1,12 @@
+@import url('..\app.component.css');
+
+.link-password {
+    font-size:10px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    display: block
+}
+
 input.ng-touched.ng-valid {
   border: 2px solid green;
 }
@@ -5,3 +14,4 @@ input.ng-touched.ng-valid {
 input.ng-touched.ng-invalid {
   border: 2px solid red;
 }
+

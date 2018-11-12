@@ -16,9 +16,12 @@ import { PostItemComponent } from './post-item/post-item.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import { ErrorComponent } from './error/error.component';
+import { AuthGuard } from './auth.guard';
+import { HomeComponent } from './home/home.component';
 
 
 const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'posts', component: PostListComponent },
@@ -35,7 +38,8 @@ const appRoutes: Routes = [
     PostItemComponent,
     PostListComponent,
     PostFormComponent,
-    ErrorComponent
+    ErrorComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -53,4 +57,4 @@ const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

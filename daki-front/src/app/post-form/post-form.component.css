@@ -1,0 +1,67 @@
+#post-form {
+  background-image: url('/../assets/bg/bg-general.png');
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #0041D9;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.form-group label {
+  margin-bottom: 0px;
+}
+
+.form-group input{
+  border: none;
+  border-bottom: solid #969FAA 2px;
+  padding: 0px;
+  border-radius: 0px;
+  max-width: 100%;
+}
+
+.form-group.file input {
+  border: none;
+  width: 100%;
+}
+
+.form-group.file .btn-clear {
+  width: 100%;
+  background-color: #3f70ea;
+  font-size: 14px;
+  color: #fff;
+}
+
+.form-group.file  input[type='file'] {
+  display: none
+}
+
+.form-group.file label {
+  background-color: #003FDA;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px 0px;
+  padding: 6px 20px;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+
+}
+
+.form-group.file label img {
+  height: 15px; 
+  width: auto;
+}
+
+.btn-submit {
+  width: 100%;
+  display: block;
+  margin-bottom: 30px;
+  z-index: 999;
+  font-size: 14px;
+}
