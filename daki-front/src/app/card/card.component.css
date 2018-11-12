@@ -10,11 +10,6 @@
   margin-bottom: 15px;
 }
 
-.card-basic {
-  display: flex;
-  flex-direction: column;
-}
-
 .image-spacer {
   width: 100%;
   height: 55vh;
@@ -30,8 +25,17 @@
   padding: 0.75rem 0.25rem 0.75rem 0.25rem;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
   border-radius: 0px 0px 15px 15px;
+}
+
+.card-text {
+  overflow-wrap: break-word;
+  margin-bottom: 10px;
+  display: inline-block;
+  padding-left: 0.5rem;
+  width: 70%;
 }
 
 .bg-color h4 {
@@ -40,14 +44,19 @@
   margin-bottom: 10px;
   display: inline-block;
   padding-left: 0.5rem;
-  width: 70%
+}
+
+.bg-color h6 {
+  padding-left: 0.5rem;
+  margin: 0;
 }
 
 .icons {
-  font-size: 32px;
+  font-size: 28px;
   display: inline-block;
   width: 25%;
   text-align: right;
+  padding-right: 1rem;
 }
 
 .fillon > svg{
@@ -67,7 +76,7 @@
   padding-left: 0.5rem;
 }
 
-.card-info{
+/* .card-info{
   box-sizing: border-box;
   padding: 1rem;
   border-radius: 0px 0px 15px 15px;
@@ -117,34 +126,14 @@
   width: 30%;
   padding-left: 0.5rem;
   margin: 0
-}
+} */
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .card-holder {
-  display: flex;
-  flex-direction: column;
-  flex-direction: row;
-  height: 100vh;
+    width: 280px;
 } 
-  .card-basic {
-    width: 100vw;
+
+.icons {
+  font-size: 25px;
 }
-
-  .image-spacer {
-    box-sizing: border-box;
-    width: 100%;
-    height: 80vh;
-    border-radius: 15px 0px 0px 0px;
-  }
-
-  .bg-color{
-    box-sizing: border-box;
-    border-radius: 0px 0px 0px 15px;
-    height: 20vh;
-  }
-
-  .card-info{
-    border-top:1px solid #EBECFF;
-    border-radius: 0px 15px 15px 0px;
-  }
 }

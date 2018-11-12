@@ -1,16 +1,17 @@
 <div class="card-holder" (click)="gotoPost()">
   <img src="https://picsum.photos/200/300" class="image-spacer" />
   <div class="bg-color" [ngStyle]="{'background-color':getTypeColor(item.type)}">
-    <div class='card-text' style="text-align:center">
-      <h4>{{item.title}}</h4>
-      <h4>{{item.subtitle}}</h4>
+    <div class='card-text'>
+      <h4>{{title}}</h4>
+      <h6>{{subtitle}}</h6>
     </div>
     <div class='icons'>
       <fa-icon class="icon-stroke" [icon]="faHeart" [ngClass]=" item.like ? 'fillon' : 'filloff'"></fa-icon>
       <fa-icon class="
-          icon-stroke" [icon]="faStar" [ngClass]="item.like ? 'fillon' : 'filloff'"></fa-icon>
+          icon-stroke" [icon]="faStar" [ngClass]="item.like ? 'fillon' : 'filloff'" *ngIf="isFav"></fa-icon>
     </div>
   </div>
 </div>
+<!-- <app-card-details class=''></app-card-details> -->
 
 <!-- [ngStyle]="{'background-color':person.country === 'UK' ? 'green' : 'red' }" -->
