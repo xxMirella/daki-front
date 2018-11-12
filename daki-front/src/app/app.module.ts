@@ -18,6 +18,7 @@ import { PostFormComponent } from './post-form/post-form.component';
 import { ErrorComponent } from './error/error.component';
 import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const appRoutes: Routes = [
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     PostListComponent,
     PostFormComponent,
     ErrorComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
