@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { PostService } from '../post.service';
 import { ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthState } from '../store/reducers/auth.reducer';
+import { Store } from '@ngrx/store';
 
 
 export interface Type {
@@ -19,8 +21,8 @@ export class PostFormComponent {
 
   get type(): any { return this.form.get('type').value; }
   get comercioHidden(): any { return this.form.get('type').value !== 'comercio'; }
-  get contatoHidden(): any { return ((this.form.get('type').value === 'comercio') || (this.form.get('type').value === 'troca')) }
-  get hourHidden(): any { return ((this.form.get('type').value === 'evento') || (this.form.get('type').value === 'troca')) }
+  get contatoHidden(): any { return ((this.form.get('type').value === 'comercio') || (this.form.get('type').value === 'troca')); }
+  get hourHidden(): any { return ((this.form.get('type').value === 'evento') || (this.form.get('type').value === 'troca')); }
   types: Type[] = [
     { value: 'alerta', viewValue: 'Alerta' },
     { value: 'comercio', viewValue: 'Comércio' },
@@ -34,37 +36,43 @@ export class PostFormComponent {
     description: '',
     address: '',
     date: '',
-    image: null,
+    foto: null,
     like: 0,
     type: '',
     contact: '',
     hour: '',
     userId: 0
-  }
+  };
   form: FormGroup;
-  loading: boolean = false;
+  loading = false;
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
     private postService: PostService,
     private fb: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private state: Store<AuthState>) {
     this.createForm();
+    state.select('auth').subscribe(v => {
+      if (v.user) {
+        this.form.get('userId').setValue(v.user.localId);
+      }
+    });
   }
 
   sendPost(event) {
     event.preventDefault();
 
     this.postService.addPost(this.form.value).subscribe(
-      value => {
-        alert("Novo post adicionado com sucesso!");
-        this.router.navigateByUrl('/posts');
+      () => {
+        alert('Novo post adicionado com sucesso!');
+        this.router.navigateByUrl('/posts').then();
       },
-      error => {
-        alert("Seu novo post não foi adicionado, verifique o formulário!")
+      () => {
+        alert('Seu novo post não foi adicionado, verifique o formulário!');
       }
-    )
+    );
   }
   createForm() {
     this.form = this.fb.group({
@@ -83,16 +91,16 @@ export class PostFormComponent {
   }
 
   onFileChange(event) {
-    let reader = new FileReader();
+    const reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
+      const file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.form.get('image').setValue({
           filename: file.name,
           filetype: file.type,
           value: reader.result.toString().split(',')[1]
-        })
+        });
       };
     }
   }

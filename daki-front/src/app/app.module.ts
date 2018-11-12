@@ -30,13 +30,13 @@ import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   // { path: 'posts', component: PostListComponent },
-  // { path: 'posts/add', component: PostFormComponent },
-  { path: '', component: CardsListComponent },
+  // // { path: 'posts/add', component: PostFormComponent },
+  { path: 'posts', component:   CardsListComponent },
   { path: 'post/:id', component: CardDetailsComponent, data: { postData: {} } },
   // { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'posts', component: PostListComponent },
+  // { path: 'posts', component: PostListComponent },
   { path: 'posts/add', component: PostFormComponent },
   { path: 'error', component: ErrorComponent },
 

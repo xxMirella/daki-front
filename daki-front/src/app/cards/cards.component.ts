@@ -11,10 +11,10 @@ import { AuthState } from '../store/reducers/auth.reducer';
 })
 
 export class CardsListComponent implements OnInit {
-  public cards: any
-  public userId: any
+  public cards: any;
+  public userId: any;
 
-  @Input() Post: CardComponent
+  @Input() Post: CardComponent;
 
   constructor(
     private router: Router,
