@@ -5,20 +5,7 @@ const boom = require('boom');
 
 
 class Utils {
-
-  static includeHeaders(response) {
-    if (response.length <= 0) {
-      return boom.internal();
-    } else {
-      return response.header([
-        'Access-Control-Allow-Headers: Content-Type, Authorization',
-        'Access-Control-Allow-Origin: *',
-        'Access-Control-Allow-Methods: POST, GET, PUT, PATCH, DELETE, OPTIONS',
-        'Content-Type: application/json',
-      ]);
-    }
-  }
-
+  
   static validateHeaders() {
     return Joi.object({ authorization: Joi.string().required() }).unknown();
   }
