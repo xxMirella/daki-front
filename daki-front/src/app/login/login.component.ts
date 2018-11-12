@@ -42,43 +42,27 @@ export class LoginComponent implements OnInit {
   logIn() {
     // console.log(this.user.email, this.user.password);
     this.authService.login(this.user.email, this.user.password).pipe(this.http_retry()).subscribe((value: any) => {
-      // console.log(value);
+      console.log(value)
       this.store.dispatch({
         type: 'SET_USER',
         payload: {
           token: value.TokenLogin.token,
           user: {
-            localId: value.response._id,
-            name: value.response.name,
-            email: value.response.email,
-            profilePhoto: value.response.profilePhoto,
-            birthDay: value.response.birthDay,
-            district: value.response.district
+            localId: value.user[0]._id,
+            name: value.user[0].name,
+            email: value.user[0].email,
+            profilePhoto: value.user[0].profilePhoto,
+            birthDay: value.user[0].birthDay,
+            district: value.user[0].district
           }
         }
       });
       localStorage.setItem('userToken', value.TokenLogin.token);
-      // console.log(value);
       this.router.navigateByUrl('/');
     }, error => {
       // this.router.navigateByUrl('/error');
       console.log(error);
-      console.log(error.error);
-
-      switch (error.error.error.message) {
-        case 'INVALID_PASSWORD':
-          alert('Senha inválida');
-        break;
-        case 'EMAIL_NOT_FOUND':
-          alert('E-mail inválido');
-        break;
-        case 'USER_DISABLED':
-          alert('E-mail inválido');
-        break;
-        default:
-          alert('Houve um erro');
-        break;
-      }
+      alert(error.error.message);
     });
   }
 }
