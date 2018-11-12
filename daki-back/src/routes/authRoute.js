@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const userDao = require('../DAO/userDAO');
-const boom = require('boom');
 const utils = require('../common/utils');
+const userManager = require('../manager/userManager');
 
 class AuthRoute {
 
@@ -15,10 +15,7 @@ class AuthRoute {
       path: '/auth/login',
       handler: async (req) => {
         const { email, password } = req.payload;
-        if (email.toLowerCase() !== this.userDao.get(email) || password.toLowerCase() !== this.userDao.get(password)) {
-          return boom.unauthorized('Email ou senha incorreto!');
-        }
-        return AuthRoute.createToken(email);
+        return userManager.validateUser(email, password);
       },
       config: {
         auth: false,

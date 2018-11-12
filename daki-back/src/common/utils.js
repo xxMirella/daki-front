@@ -6,7 +6,7 @@ const config = require('../config/config');
 class Utils {
 
   static validateHeaders() {
-    Joi.object({ authorization: Joi.string().required() }).unknown();
+    return Joi.object({ authorization: Joi.string().required() }).unknown();
   }
 
   static validateLocalPayload() {

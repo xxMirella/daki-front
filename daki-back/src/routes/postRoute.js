@@ -17,7 +17,7 @@ class PostRoute {
       type:        Joi.string().required(),
       image:       Joi.string(),
       title:       Joi.string().required(),
-      userLocal:   Joi.string().required(),
+      userLocal:   utils.validateLocalPayload(),
       address:     Joi.string(),
       date:        Joi.string(),
       hour:        Joi.string(),
@@ -34,12 +34,21 @@ class PostRoute {
       method: 'POST',
       path: '/timeline/posts',
       handler: async (req) => {
-        return await this.posts.post(req.payload);
+        try {
+          return await this.posts.post(req.payload);
+        } catch (error) {
+          console.log(error)
+        }
+
       },
       config: {
         tags: ['api'],
         description: 'Cadastra um novo post',
         validate: {
+          headers: utils.validateHeaders(),
+          failAction: (request, h, err) => {
+            throw err;
+          },
           payload: PostRoute.validatePosts(),
         }
       }
@@ -51,12 +60,8 @@ class PostRoute {
       method: 'GET',
       path: '/timeline/posts',
       handler: async (req, h) => {
-        try {
-          const { limit, ignore } = req.query;
-          return await this.posts.list({}, ignore, limit);
-        } catch (err) {
-          return Boom.internal();
-        }
+        const { limit, ignore } = req.query;
+        return await this.posts.list({}, ignore, limit);
       },
       config: {
         tags: ['api'],
@@ -67,15 +72,15 @@ class PostRoute {
           failAction: (request, h, err) => {
             throw err;
           },
-        },
-        query: {
-          ignore: Joi.number()
-            .integer()
-            .default(0),
+          query: {
+            ignore: Joi.number()
+              .integer()
+              .default(0),
 
             limit: Joi.number()
-            .integer()
-            .default(10),
+              .integer()
+              .default(10),
+          },
         },
       },
     }
