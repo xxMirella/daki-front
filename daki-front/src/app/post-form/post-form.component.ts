@@ -4,7 +4,7 @@ import { ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthState } from '../store/reducers/auth.reducer';
-import { Store } from '@ngrx/store/store';
+import { Store } from '@ngrx/store';
 
 
 export interface Type {

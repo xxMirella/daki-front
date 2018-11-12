@@ -33,7 +33,7 @@ export class AppComponent {
             token: userToken
           }
         });
-      }, error => {
+      }, () => {
         localStorage.removeItem('userToken');
       });
     }

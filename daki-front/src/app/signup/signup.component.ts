@@ -1,5 +1,5 @@
 import { retryWhen, flatMap } from 'rxjs/operators';
-import { Observable, interval, throwError, of } from 'rxjs';
+import { Observable, interval, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
       src.pipe(
         retryWhen(_ => {
           return interval(delayMs).pipe(
-            flatMap(count => (count == maxRetry ? src : of(count)))
+            flatMap(count => (count === maxRetry ? src : of(count)))
           );
         })
       );
@@ -100,10 +100,12 @@ export class SignupComponent implements OnInit {
                 birthDay: value.user[0].birthDay,
                 district: value.user[0].district
               }
-          });
+            }
+          },
+          );
           localStorage.setItem('userToken', value.TokenLogin.token);
 
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/').then();
         },
         error => {
           // console.log(error);

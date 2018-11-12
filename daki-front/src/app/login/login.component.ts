@@ -1,7 +1,7 @@
 import { retryWhen, flatMap } from 'rxjs/operators';
-import { Observable, interval, throwError, of } from 'rxjs';
+import { Observable, interval, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AuthService } from './../auth.service';
+import { AuthService } from '../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private store: Store<AuthService>,
     private router: Router
   ) {
-    store.select('auth').subscribe((value) => {
+    store.select('auth').subscribe(() => {
       // console.log(value);
     });
   }
@@ -31,9 +31,9 @@ export class LoginComponent implements OnInit {
 
   http_retry(maxRetry: number = 2, delayMs: number = 1000) {
     return (src: Observable<any>) => src.pipe(
-      retryWhen(_ => {
+      retryWhen(() => {
         return interval(delayMs).pipe(
-          flatMap(count => count == maxRetry ? src : of(count))
+          flatMap(count => count === maxRetry ? src : of(count))
         );
       })
     );
@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
   logIn() {
     // console.log(this.user.email, this.user.password);
     this.authService.login(this.user.email, this.user.password).pipe(this.http_retry()).subscribe((value: any) => {
-      console.log(value)
       this.store.dispatch({
         type: 'SET_USER',
         payload: {
@@ -58,7 +57,7 @@ export class LoginComponent implements OnInit {
         }
       });
       localStorage.setItem('userToken', value.TokenLogin.token);
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('posts').then();
     }, error => {
       // this.router.navigateByUrl('/error');
       console.log(error);
