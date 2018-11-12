@@ -20,7 +20,10 @@ class ServerHapi {
     this.server = hapi.server(
       {
         port: port,
-        host: host
+        host: host,
+        routes: {
+          cors: true,
+        }
       }
     );
   }
