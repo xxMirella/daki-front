@@ -1,5 +1,5 @@
 <div class="card-holder" (click)="gotoPost()">
-  <span *ngIf="isValidImg(item)">Img: <img [src]="getImage(item)"></span>
+  <span *ngIf="isValidImg(item)"><img class="image-spacer" [src]="getImage(item)"></span>
   <div class="bg-color" [ngStyle]="{'background-color':getTypeColor(item.type)}">
     <div class='card-text'>
       <h4>{{title}}</h4>
