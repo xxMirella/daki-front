@@ -120,7 +120,7 @@ class UserPostsRoute {
       handler: async (req) => {
         const { userId, postId } = req.payload;
         const isValid = this.validateExistingPostAndUser();
-        console.log(isValid);
+        
         if ( isValid ){
           return await this.postsDAO.push(postId, {likeUserIds: userId});
         } else {
