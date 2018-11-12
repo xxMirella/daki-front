@@ -15,8 +15,7 @@ class AuthRoute {
       path: '/auth/login',
       handler: async (req) => {
         const { email, password } = req.payload;
-        const response = userManager.validateUser(email, password);
-        return utils.includeHeaders(response);
+        return userManager.validateUser(email, password);
       },
       config: {
         auth: false,
