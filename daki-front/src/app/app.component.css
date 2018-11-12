@@ -1,8 +1,17 @@
+body {
+    --alert-color: #F95F62;
+    --exchange-color: #FFBA5C; 
+    --event-color: #00A6FF; 
+    --service-color: #77D353;
+}
 /* menu superior */
 .navbar {
   background-color: #4E54C8;
   position: relative;
 }
+
+
+
 
 @media (min-width: 768px) {
   .navbar-collapse {

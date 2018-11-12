@@ -1,0 +1,152 @@
+.card-holder {
+  display: flex;
+  flex-direction: column;
+  width: '90%';
+  height: auto;
+  /* padding: 10px; */
+  border-radius: 25px;
+  box-shadow: 5px;
+  background-color: white;
+  margin-bottom: 15px;
+  margin: 0;
+}
+
+.card-basic {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-spacer {
+  width: 100%;
+  height: 55vh;
+  border-radius: 15px 15px 0px 0px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.bg-color{
+  color: white;
+  /* background-color: #00A6FF; */
+  width: 100%;
+  height: auto;
+  padding: 0.75rem 0.25rem 0.75rem 0.25rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.bg-color h4 {
+  overflow-wrap: break-word;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  padding-left: 0.5rem;
+  width: 70%
+}
+
+.icons {
+  font-size: 32px;
+  display: inline-block;
+  width: 25%;
+  text-align: right;
+}
+
+.fillon > svg{
+  color: white !important;
+}
+.filloff > svg{
+  color: transparent;
+}
+
+.icon-stroke {
+  stroke: white;
+  stroke-width: 1em;
+  color: transparent;
+}
+
+.icon-stroke:last-of-type {
+  padding-left: 0.5rem;
+}
+
+.card-info{
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 0px 0px 15px 15px;
+  border: 1px solid #EBECFF;
+  border-top: 0;
+}
+
+.card-info h3{
+  margin: 0.25rem 0rem 0.25rem 0rem;
+}
+
+.card-info p{
+  font-size: 14px;
+  display: inline-block;
+  width: 50%;
+}
+
+.card-info p:first-of-type{
+  font-size: 18px;
+  width: 100%;
+  margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
+.card-info p:last-of-type{
+  width: 100%;
+}
+
+.card-info p:nth-child(3){
+  float: right;
+  text-align: right;
+
+}
+
+.arrow > svg {
+  color: black !important;
+}
+
+.back {
+  box-sizing: border-box;
+  padding: 1rem 1rem 1rem 0rem;
+  margin-top: 1rem;
+  color: black;
+  cursor: pointer;
+}
+
+.back p {
+  display: inline-block;
+  width: 30%;
+  padding-left: 0.5rem;
+  margin: 0
+}
+
+@media (min-width: 768px) {
+  .card-holder {
+  display: flex;
+  flex-direction: column;
+  flex-direction: row;
+  height: 100vh;
+} 
+  .card-basic {
+    width: 100vw;
+}
+
+  .image-spacer {
+    box-sizing: border-box;
+    width: 100%;
+    height: 80vh;
+    border-radius: 15px 0px 0px 0px;
+  }
+
+  .bg-color{
+    box-sizing: border-box;
+    border-radius: 0px 0px 0px 15px;
+    height: 20vh;
+  }
+
+  .card-info{
+    border-top:1px solid #EBECFF;
+    border-radius: 0px 15px 15px 0px;
+  }
+}
