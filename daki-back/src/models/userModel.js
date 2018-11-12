@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const AddressSchema = require('./addressModel');
+const ImagesSchema = require('./imagesModel');
 
 let UserModel = new mongoose.Schema({
-  profilePhoto: { type: String },
+  profilePhoto: ImagesSchema,
   address:      AddressSchema,
   name:         { type: String, required: true },
   phone:        { type: String },

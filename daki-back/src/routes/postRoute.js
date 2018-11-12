@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const postDAO = require('../DAO/postDAO');
-const boom = require('boom');
 const utils = require('../common/utils');
 
 
@@ -15,7 +14,7 @@ class PostRoute {
       userId: Joi.string().required(),
       userName: Joi.string().required(),
       type: Joi.string().required(),
-      image: Joi.string(),
+      image: utils.validateImagePayload(),
       title: Joi.string().required(),
       userLocal: utils.validateLocalPayload(),
       address: Joi.string(),
@@ -34,7 +33,7 @@ class PostRoute {
       userId: Joi.string().required(),
       userName: Joi.string().required(),
       type: Joi.string(),
-      image: Joi.string(),
+      image: utils.validateImagePayload(),
       title: Joi.string(),
       userLocal: utils.validateLocalPayload(),
       address: Joi.string(),
