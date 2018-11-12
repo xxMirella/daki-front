@@ -14,8 +14,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 // import { PostItemComponent } from './post-item/post-item.component';
 // import { PostListComponent } from './post-list/post-list.component';
-import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { PostFormComponent } from './post-form/post-form.component';
 import { CardComponent } from './card/card.component';
 import { CardsListComponent } from './cards/cards.component';
@@ -34,23 +32,22 @@ const appRoutes: Routes = [
   // { path: 'posts', component: PostListComponent },
   // { path: 'posts/add', component: PostFormComponent },
   { path: '', component: CardsListComponent },
-  { path: 'post/:id', component: CardDetailsComponent, data:{postData: {}} },
-]
-  { path: '', component: HomeComponent },
+  { path: 'post/:id', component: CardDetailsComponent, data: { postData: {} } },
+  // { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'posts', component: PostListComponent },
   { path: 'posts/add', component: PostFormComponent },
   { path: 'error', component: ErrorComponent },
 
-  { path: '**', redirectTo: '' }
+  // { path: '**', redirectTo: '' }
 ];
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
     CardsListComponent,
-    CardDetailsComponent
+    CardDetailsComponent,
     LoginComponent,
     SignupComponent,
     PostItemComponent,
@@ -71,7 +68,7 @@ const appRoutes: Routes = [
     NgxViacepModule,
     StoreModule.forRoot({
       auth: authReducer
-    })
+    }),
     ReactiveFormsModule,
     FontAwesomeModule
   ],

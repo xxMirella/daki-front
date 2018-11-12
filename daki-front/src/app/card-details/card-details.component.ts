@@ -70,13 +70,13 @@ export class CardDetailsComponent implements OnInit {
   getTypeColor(type) {
     switch (type) {
       case "Events":
-        return 'var(--event-color)'
+        return 'var(--primary)'
       case "Exchange":
-        return 'var(--exchange-color)'
+        return 'var(--warning)'
       case "Service":
-        return 'var(--service-color)'
+        return 'var(--teal)'
       case "Alert":
-        return 'var(--alert-color)'
+        return 'var(--danger)'
     }
   }
 

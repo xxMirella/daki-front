@@ -1,11 +1,8 @@
-* {
+body {
     --alert-color: #F95F62;
     --exchange-color: #FFBA5C; 
     --event-color: #00A6FF; 
-    --service-color: #77D353; 
-}
-* {
-    font-family: 'Lato', sans-serif;
+    --service-color: #77D353;
 }
 /* menu superior */
 .navbar {
