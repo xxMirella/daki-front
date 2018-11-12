@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const postDAO = require('../DAO/postDAO');
-const boom = require('boom');
 const utils = require('../common/utils');
 
 
@@ -15,7 +14,7 @@ class PostRoute {
       userId: Joi.string().required(),
       userName: Joi.string().required(),
       type: Joi.string().required(),
-      image: Joi.string(),
+      image: utils.validateImagePayload(),
       title: Joi.string().required(),
       userLocal: utils.validateLocalPayload(),
       address: Joi.string(),
@@ -34,7 +33,7 @@ class PostRoute {
       userId: Joi.string().required(),
       userName: Joi.string().required(),
       type: Joi.string(),
-      image: Joi.string(),
+      image: utils.validateImagePayload(),
       title: Joi.string(),
       userLocal: utils.validateLocalPayload(),
       address: Joi.string(),
@@ -79,7 +78,7 @@ class PostRoute {
       method: 'GET',
       path: '/timeline/posts',
       handler: async (req, h) => {
-        const {limit, ignore} = req.query;
+        const { limit, ignore } = req.query;
         return await this.postsDao.list({}, ignore, limit);
       },
       config: {
@@ -108,11 +107,11 @@ class PostRoute {
   delete() {
     return {
       method: 'DELETE',
-      path: '/timeline/posts/{id}',
+      path: '/timeline/posts/{postId}',
       handler: async (request, h) => {
         try {
-          const {id} = request.params;
-          return await this.postsDao.delete(id);
+          const { postId } = request.params;
+          return await this.postsDao.delete({_id: postId});
         } catch (err) {
           console.log(err);
         }
@@ -124,7 +123,7 @@ class PostRoute {
         validate: {
           headers: utils.validateHeaders(),
           params: {
-            id: Joi.string()
+            postId: Joi.string()
               .max(200)
               .required(),
           },
@@ -136,11 +135,11 @@ class PostRoute {
   put() {
     return {
       method: 'PUT',
-      path: '/timeline/posts/{id}',
+      path: '/timeline/posts/{postId}',
       handler: async (request, h) => {
         try {
-          const {id} = request.params;
-          return await this.postsDao.update(id, request.payload);
+          const { postId } = request.params;
+          return await this.postsDao.update(postId, request.payload);
         } catch (err) {
           console.log(err);
         }
@@ -152,7 +151,7 @@ class PostRoute {
         validate: {
           headers: utils.validateHeaders(),
           params: {
-            id: Joi.string()
+            postId: Joi.string()
               .max(200)
               .required(),
           },
@@ -162,30 +161,6 @@ class PostRoute {
     };
   };
 
-  userFavPosts() {
-    return {
-      method: 'POST',
-      path: '/timeline/auth/favs',
-      handler: async (req) => {
-        const { email, password } = req.payload;
-        return userManager.validateUser(email, password);
-      },
-      config: {
-        auth: false,
-        tags: ['api'],
-        description: 'Deve gerar um token para o usuario',
-        validate: {
-          payload: {
-            email: Joi.string()
-              .required(),
-            password: Joi.string()
-              .max(100)
-              .required(),
-          }
-        }
-      }
-    }
-  }
 }
 
 module.exports = PostRoute;

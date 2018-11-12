@@ -6,6 +6,7 @@ type Post = {
   date: string;
   foto: string;
   like: number;
+  fav: boolean;
   type: string;
   contact: string;
   hour: string;

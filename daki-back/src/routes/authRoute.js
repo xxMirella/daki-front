@@ -15,7 +15,11 @@ class AuthRoute {
       path: '/auth/login',
       handler: async (req) => {
         const { email, password } = req.payload;
-        return userManager.validateUser(email, password);
+        const user =  await this.userDao.get({email: email});
+        return {
+          user,
+          "TokenLogin": await userManager.validateUser(email, password)
+        };
       },
       config: {
         auth: false,
@@ -50,7 +54,7 @@ class AuthRoute {
         }
       }
     }
-  }
+  };
 
   getMe() {
     return {

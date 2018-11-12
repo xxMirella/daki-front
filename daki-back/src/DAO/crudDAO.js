@@ -22,8 +22,16 @@ class CrudDAO {
       .then()
   }
 
-  delete(id) {
-    return this.model.deleteOne({ _id: id }).then();
+  delete(criteria, item) {
+    return this.model.deleteOne(criteria, item).then();
+  }
+
+  push(id, item) {
+    return  this.model.updateOne(id, { $push: item })
+  }
+
+  pull(id, item) {
+    return this.model.updateOne(id, { $pull: item});
   }
 
   update(id, item) {

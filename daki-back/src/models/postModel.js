@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const CommentsSchema = require('./commentsModel');
 const AddressSchema = require('./addressModel');
 const ObjectId = mongoose.Schema.ObjectId;
+const ImagesSchema = require('./imagesModel');
 
 const postTypes = [
   'Events',
@@ -14,14 +15,14 @@ let PostSchema = new mongoose.Schema({
   userId:      { type: ObjectId, required: true },
   userName:    { type: String, required: true },
   type:        postTypes,
-  image:       { type: String },
+  image:       ImagesSchema,
   title:       { type: String, required: true },
   userLocal:   AddressSchema,
   address:     { type: String },
   date:        { type: String },
   hour:        { type: String },
   link:        { type: String, required: true },
-  likeUserId:  { type: Array },
+  likeUserIds: { type: Array },
   comments:    CommentsSchema,
   description: { type: String, required: true },
   contact:     { type: String },

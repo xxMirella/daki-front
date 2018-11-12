@@ -3,7 +3,7 @@
       <div class="form-board col-12 col-md-8 offset-md-2">
         <img src="" alt="">
           <h2>Novo Post</h2>
-          <form [formGroup]="form">
+          <form [formGroup]="form" #form="ngForm">
             <div class="form-group">
               <label for="type">Como será sua postagem?</label>
               <select formControlName="type" required #type class="form-control" >
@@ -13,6 +13,16 @@
             <div class="form-group">
               <label for="title">Título</label>
               <input type="text"  class="form-control" formControlName="title" required minlength="5" #title placeholder="Digite o título">
+              
+
+              <div *ngIf="title?.errors?.required">
+                O campo título é obrigatório.
+              </div>
+      
+              <div *ngIf="title?.errors?.minlength">
+                O campo título tem que ter no mínimo 5 caracteres.
+              </div>
+
             </div>
             <div class="form-group">
                 <label for="">Localização</label>

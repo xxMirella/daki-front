@@ -28,7 +28,7 @@ export class PostFormComponent {
     { value: 'troca', viewValue: 'Troca' }
   ];
 
-  post: Post = {
+  post: any = {
     id: 0,
     title: '',
     description: '',
