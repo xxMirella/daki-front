@@ -20,28 +20,23 @@ const initialState = {
   token: null,
 };
 
-export function authReducer (state = initialState, action: any) {
+export function authReducer(state = initialState, action: any) {
 
   switch (action.type) {
     case 'SET_USER':
-    state = {
-      ...state,
-      ...action.payload,
-    };
-    break;
+      state = {
+        ...state,
+        ...action.payload,
+      };
+      break;
     case 'LOGOUT':
-    state = {
-      user: null,
-      token: null,
-    };
-    case 'GET_USER':
-    state = {
-      
-    }
-    break;
+      state = {
+        user: null,
+        token: null,
+      };
   }
 
   return state;
- }
+}
 
 
