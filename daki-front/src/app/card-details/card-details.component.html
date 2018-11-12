@@ -1,0 +1,24 @@
+<div class="card-holder">
+  <div class='card-basic'>
+    <img src="https://picsum.photos/200/300" class="image-spacer" />
+    <div class="bg-color" [ngStyle]="{'background-color':getTypeColor(item.type)}">
+      <h4>{{ title }}</h4>
+      <div class='icons'>
+        <fa-icon class="icon-stroke" [icon]="faHeart" [ngClass]=" item.like ? 'fillon' : 'filloff'"></fa-icon>
+        <fa-icon class="
+          icon-stroke" [icon]="faStar" [ngClass]="item.like ? 'fillon' : 'filloff'"></fa-icon>
+      </div>
+    </div>
+  </div>
+  <div class="card-info">
+    <h3>{{ title }}</h3>
+    <p>{{ description }}</p>
+    <p>Data: {{ date }}</p>
+    <p>Horário: {{ hour }}</p>
+    <p>Local: {{ address }}</p>
+  </div>
+  <div class='back'>
+    <fa-icon class='arrow' class="icon-stroke" [icon]="faArrowLeft"></fa-icon>
+    <p (click)='goToHome()'>VOLTAR</p>
+  </div>
+</div>

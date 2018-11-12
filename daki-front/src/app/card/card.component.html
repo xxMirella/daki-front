@@ -1,16 +1,16 @@
-<div>
-  <div class='img'>
-    <img></div>
+<div class="card-holder" (click)="gotoPost()">
+  <img src="https://picsum.photos/200/300" class="image-spacer" />
+  <div class="bg-color" [ngStyle]="{'background-color':getTypeColor(item.type)}">
+    <div class='card-text' style="text-align:center">
+      <h4>{{item.title}}</h4>
+      <h4>{{item.subtitle}}</h4>
+    </div>
+    <div class='icons'>
+      <fa-icon class="icon-stroke" [icon]="faHeart" [ngClass]=" item.like ? 'fillon' : 'filloff'"></fa-icon>
+      <fa-icon class="
+          icon-stroke" [icon]="faStar" [ngClass]="item.like ? 'fillon' : 'filloff'"></fa-icon>
+    </div>
+  </div>
 </div>
-<title></title>
-<p *ngIf='alert'>{{ post.address }}</p>
-<p *ngIf='service'>{{ post.contact }}</p>
-<p *ngIf='event'>{{ post.date }}</p>
-<p *ngIf='sharing'>{{ post.address }}</p>
 
-</div>
-
-{
-  type: 
-
-}
+<!-- [ngStyle]="{'background-color':person.country === 'UK' ? 'green' : 'red' }" -->
