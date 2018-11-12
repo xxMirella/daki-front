@@ -5,12 +5,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthService {
-  // private SIGNUP_URL = '';
-  // private LOGIN_URL = '';
-  // private ACCOUNT_INFO_URL = '';
-  private SIGNUP_URL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyChwnkBncuwCAQqDjgjY3H7ocYfO2IPnCA';
-  private LOGIN_URL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyChwnkBncuwCAQqDjgjY3H7ocYfO2IPnCA';
-  private ACCOUNT_INFO_URL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyChwnkBncuwCAQqDjgjY3H7ocYfO2IPnCA';
+  private SIGNUP_URL = '';
+  private LOGIN_URL = '';
+  private ACCOUNT_INFO_URL = '';
 
   constructor(
     private http: HttpClient
@@ -21,21 +18,15 @@ export class AuthService {
     dob: string,
     cep: string,
     neighborhood: string,
-    city: string,
-    state: string,
-    phone: string,
     email: string,
     password: string
     ) {
       return this.http.post(this.SIGNUP_URL,
         {
-          // name: name,
-          // dob: dob,
-          // cep: cep,
-          // neighborhood: neighborhood,
-          // city: city,
-          // state: state,
-          // phone: phone,
+          name: name,
+          dob: dob,
+          cep: cep,
+          neighborhood: neighborhood,
           email: email,
           password: password
         });

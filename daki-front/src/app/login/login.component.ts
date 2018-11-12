@@ -1,3 +1,5 @@
+import { retryWhen, flatMap } from 'rxjs/operators';
+import { Observable, interval, throwError, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -27,23 +29,39 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  http_retry(maxRetry: number = 2, delayMs: number = 1000) {
+    return (src: Observable<any>) => src.pipe(
+      retryWhen(_ => {
+        return interval(delayMs).pipe(
+          flatMap(count => count == maxRetry ? src : of(count))
+        );
+      })
+    );
+  }
+
   logIn() {
     // console.log(this.user.email, this.user.password);
-    this.authService.login(this.user.email, this.user.password).subscribe((value: any) => {
+    this.authService.login(this.user.email, this.user.password).pipe(this.http_retry()).subscribe((value: any) => {
+      // console.log(value);
       this.store.dispatch({
         type: 'SET_USER',
         payload: {
-          token: value.idToken,
+          token: value.TokenLogin.token,
           user: {
-            email: value.email,
-            localId: value.localId
+            localId: value.response._id,
+            name: value.response.name,
+            email: value.response.email,
+            profilePhoto: value.response.profilePhoto,
+            birthDay: value.response.birthDay,
+            district: value.response.district
           }
         }
       });
-      localStorage.setItem('userToken', value.idToken);
+      localStorage.setItem('userToken', value.TokenLogin.token);
       // console.log(value);
       this.router.navigateByUrl('/');
     }, error => {
+      // this.router.navigateByUrl('/error');
       console.log(error);
       console.log(error.error);
 
