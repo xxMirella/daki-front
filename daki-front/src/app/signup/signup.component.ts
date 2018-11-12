@@ -14,16 +14,21 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
   newUser = {
     name: '',
-    dob: '',
-    cep: '',
-    neighborhood: '',
-    city: '',
-    state: '',
-    phone: '',
+    birthDay: '',
     email: '',
     password: '',
-    password_confirm: ''
+    phone: '',
+    local: {
+      cep: '',
+      street: '',
+      district: '',
+      city: '',
+      country: 'Brazil'
+    }
   };
+
+  stateInput: String = '';
+  password_confirmInput: String = '';
 
   constructor(
     private viacep: NgxViacepService,
@@ -35,23 +40,28 @@ export class SignupComponent implements OnInit {
   ngOnInit() {}
 
   http_retry(maxRetry: number = 2, delayMs: number = 1000) {
-    return (src: Observable<any>) => src.pipe(
-      retryWhen(_ => {
-        return interval(delayMs).pipe(
-          flatMap(count => count == maxRetry ? src : of(count))
-        );
-      })
-    );
+    return (src: Observable<any>) =>
+      src.pipe(
+        retryWhen(_ => {
+          return interval(delayMs).pipe(
+            flatMap(count => (count == maxRetry ? src : of(count)))
+          );
+        })
+      );
   }
 
   validateCep() {
-    this.viacep.buscarPorCep(this.newUser.cep).then(( endereco: Endereco ) => {
-      this.newUser.neighborhood = endereco.bairro;
-      this.newUser.city = endereco.localidade;
-      this.newUser.state = endereco.uf;
-     }).catch( (error: ErroCep) => {
-       console.log(error.message);
-     });
+    this.viacep
+      .buscarPorCep(this.newUser.local.cep)
+      .then((endereco: Endereco) => {
+        this.newUser.local.street = endereco.logradouro;
+        this.newUser.local.district = endereco.bairro;
+        this.newUser.local.city = endereco.localidade;
+        this.stateInput = endereco.uf;
+      })
+      .catch((error: ErroCep) => {
+        console.log(error.message);
+      });
   }
 
   signUp() {
@@ -61,50 +71,59 @@ export class SignupComponent implements OnInit {
       this.newUser.phone,
     */
 
-    this.authService.signup(
-      this.newUser.name,
-      this.newUser.dob,
-      this.newUser.cep,
-      this.newUser.neighborhood,
-      this.newUser.email,
-      this.newUser.password
-    ).subscribe((value: any) => {
-      this.store.dispatch({
-        type: 'SET_USER',
-        payload: {
-          token: value.TokenLogin.token,
-          user: {
-            localId: value.response._id,
-            name: value.response.name,
-            email: value.response.email,
-            profilePhoto: value.response.profilePhoto,
-            birthDay: value.response.birthDay,
-            district: value.response.district
+    this.authService
+      .signup(
+        this.newUser.name,
+        this.newUser.birthDay,
+        this.newUser.email,
+        this.newUser.password,
+        this.newUser.phone,
+        this.newUser.local.cep,
+        this.newUser.local.street,
+        this.newUser.local.district,
+        this.newUser.local.city,
+        this.newUser.local.country,
+      )
+      .subscribe(
+        (value: any) => {
+          console.log(value);
+          this.store.dispatch({
+            type: 'SET_USER',
+            payload: {
+              token: value.TokenLogin.token,
+              user: {
+                localId: value.response._id,
+                name: value.response.name,
+                email: value.response.email,
+                profilePhoto: value.response.profilePhoto,
+                birthDay: value.response.birthDay,
+                district: value.response.district
+              }
+            }
+          });
+          localStorage.setItem('userToken', value.TokenLogin.token);
+
+          this.router.navigateByUrl('/');
+        },
+        error => {
+          console.log(error);
+          // console.log(error.error);
+
+          switch (error.error.error.message) {
+            case 'EMAIL_EXISTS':
+              alert('E-mail já existente');
+              break;
+            case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+              alert('Muitas tentativas, tente novamente mais tarde');
+              break;
+            case 'WEAK_PASSWORD':
+              alert('A senha deve ter no mínimo 6 caracteres');
+              break;
+            default:
+              alert('Houve um erro');
+              break;
           }
         }
-      });
-      localStorage.setItem('userToken', value.TokenLogin.token);
-
-      this.router.navigateByUrl('/');
-    }, error => {
-      // console.log(error);
-      // console.log(error.error);
-
-      switch (error.error.error.message) {
-        case 'EMAIL_EXISTS':
-          alert('E-mail já existente');
-        break;
-        case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-          alert('Muitas tentativas, tente novamente mais tarde');
-        break;
-        case 'WEAK_PASSWORD':
-          alert('A senha deve ter no mínimo 6 caracteres');
-        break;
-        default:
-          alert('Houve um erro');
-        break;
-      }
-    });
-
+      );
   }
 }
